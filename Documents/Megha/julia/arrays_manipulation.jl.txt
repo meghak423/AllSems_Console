@@ -1,0 +1,31 @@
+arr = [1, 2, 3, 4, 5]                   # Define an array # Program demonstrating arrays and its manipulations
+println("First element: ", arr[1])              # Accessing elements
+println("Last element: ", arr[end])
+println("Length of the array: ", length(arr))             # Length of the array
+push!(arr, 6)               # Adding elements to the end of the array
+println("Array after adding 6 at the end: ", arr)
+pop!(arr)               # Removing the last element
+println("Array after removing the last element: ", arr)
+insert!(arr, 3, 10)                  # Inserting an element at a specific index
+println("Array after inserting 10 at index 3: ", arr)
+deleteat!(arr, 2)           # Removing an element at a specific index
+println("Array after deleting element at index 2: ", arr)
+output:    First element: 1
+	Last element: 5
+	Length of the array: 5
+	Array after adding 6 at the end: [1, 2, 3, 4, 5, 6]
+	Array after removing the last element: [1, 2, 3, 4, 5]
+	Array after inserting 10 at index 3: [1, 2, 10, 3, 4, 5]
+	Array after deleting element at index 2: [1, 10, 3, 4, 5]
+arr1 = [1, 2, 3]                 # Define two arrays # Program demonstrating array operations
+arr2 = [4, 5, 6]
+arr_concat = vcat(arr1, arr2)              # Concatenation
+println("Concatenated array: ", arr_concat)
+arr_sum = arr1 .+ arr2                    # Element-wise addition
+println("Element-wise addition: ", arr_sum)
+arr_product = arr1 .* arr2              # Element-wise multiplication
+println("Element-wise multiplication: ", arr_product)
+output:  Concatenated array: [1, 2, 3, 4, 5, 6]
+	Element-wise addition: [5, 7, 9]
+	Element-wise multiplication: [4, 10, 18]
+

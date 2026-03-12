@@ -1,0 +1,34 @@
+python -m venv venv
+
+.\venv\Scripts\activate
+
+pip install -r requirements.txt
+
+.\start.bat
+
+
+
+
+python --version
+
+ python.exe -m pip install --upgrade pip
+
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+
+python -m uvicorn app.main:app
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+######    ctrl + L   for Agent

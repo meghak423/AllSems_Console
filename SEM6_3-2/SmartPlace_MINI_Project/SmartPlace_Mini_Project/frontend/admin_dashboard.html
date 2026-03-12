@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - SmartPlace</title>
+    <!-- Modern Fonts matching Lovable -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6', // Teal
+                            600: '#0d9488',
+                            900: '#1e293b', // Dark Slate for headers
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #f8fafc; }
+        .glass-nav { background: white; border-bottom: 1px solid #e2e8f0; }
+        .skill-pill { background: #f0fdfa; color: #14b8a6; padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+        .skill-pill-gray { background: #f1f5f9; color: #64748b; padding: 4px 12px; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+        .nav-link { padding: 8px 16px; border-radius: 8px; font-weight: 500; font-size: 0.875rem; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; color: #475569; }
+        .nav-link:hover { background: #f1f5f9; }
+        .nav-link.active { background: #14b8a6; color: white; }
+        
+        /* Selectable Job Card */
+        .job-card-selectable { border: 2px solid transparent; cursor: pointer; transition: all 0.2s; }
+        .job-card-selectable:hover { border-color: #ccfbf1; background-color: #f8fafc; }
+        .job-card-selectable.selected { border-color: #14b8a6; background-color: #f0fdfa; box-shadow: 0 4px 6px -1px rgba(20, 184, 166, 0.1), 0 2px 4px -1px rgba(20, 184, 166, 0.06); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-gray-800">
+
+    <!-- Top Navigation -->
+    <nav class="glass-nav sticky top-0 z-50 px-6 py-3 flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-2 cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center">
+                <i class="fas fa-brain text-white text-sm"></i>
+            </div>
+            <span class="font-bold text-lg text-brand-900 tracking-tight">SmartPlace</span>
+        </div>
+        
+        <div class="hidden md:flex items-center gap-2">
+            <div class="nav-link active" onclick="switchTab('dashboard')" id="nav-dashboard">
+                <i class="fas fa-th-large"></i> Dashboard
+            </div>
+            <div class="nav-link" onclick="switchTab('manage-jobs')" id="nav-manage-jobs">
+                <i class="fas fa-briefcase"></i> Manage Jobs
+            </div>
+            <div class="nav-link" onclick="switchTab('all-students')" id="nav-all-students">
+                <i class="fas fa-users"></i> All Students
+            </div>
+        </div>
+
+        <div class="flex gap-4 items-center">
+            <div class="hidden sm:flex items-center gap-2">
+                <span class="text-sm font-medium text-gray-600" id="nav-admin-name">Admin</span>
+                <span class="text-[10px] uppercase tracking-wider font-bold bg-brand-50 text-brand-500 px-2 py-0.5 rounded">Admin</span>
+            </div>
+            <button onclick="logout()" class="text-sm font-medium text-gray-500 hover:text-red-500 transition flex items-center gap-2 ml-4">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="fixed inset-0 bg-white/80 backdrop-blur-sm z-40 hidden items-center justify-center flex-col shadow-lg">
+        <i class="fas fa-circle-notch fa-spin text-4xl text-brand-500 mb-4"></i>
+        <h3 class="text-xl font-bold text-brand-900 mb-1">Processing AI Matches</h3>
+        <p class="text-gray-500 text-sm">Evaluating student skills against required job profiles...</p>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-6 md:p-8">
+
+        <!-- DASHBOARD TAB -->
+        <div id="tab-dashboard" class="space-y-8 animate-fade-in block">
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center flex flex-col items-center justify-center">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fas fa-users"></i></div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1" id="stat-students">0</div>
+                    <div class="text-xs text-gray-500 font-medium tracking-wide uppercase">Total Students</div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center flex flex-col items-center justify-center">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fas fa-briefcase"></i></div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1" id="stat-jobs">0</div>
+                    <div class="text-xs text-gray-500 font-medium tracking-wide uppercase">Active Jobs</div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center flex flex-col items-center justify-center">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fas fa-chart-line"></i></div>
+                    <div class="text-3xl font-bold text-brand-500 mb-1" id="stat-matches">0</div>
+                    <div class="text-xs text-brand-600 font-medium tracking-wide uppercase">Total Matches</div>
+                </div>
+            </div>
+
+            <!-- Job Selection -->
+            <div>
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl font-bold text-brand-900">Select Job Posting</h2>
+                    <button onclick="recomputeMatches()" class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 flex items-center gap-2 shadow-sm text-gray-700 transition">
+                        <i class="fas fa-sync-alt text-brand-500"></i> Recompute All Matches
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-4" id="job-selector-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <!-- Ranked Candidates -->
+            <div id="rankings-section" class="hidden flex-col gap-4">
+                
+                <h2 class="text-xl font-bold text-brand-900 flex items-center gap-2 mb-2 mt-4" id="rankings-header">
+                    <i class="fas fa-chart-bar text-brand-500"></i> Ranked Candidates
+                </h2>
+                
+                <!-- Filters -->
+                <div class="bg-white p-2 rounded-xl border border-gray-200 shadow-sm flex flex-wrap gap-2 items-center text-sm">
+                    <div class="px-3 py-1.5 text-gray-500 font-semibold flex items-center gap-2">
+                        <i class="fas fa-filter"></i> FILTERS:
+                    </div>
+                    <select id="filter-cgpa" class="bg-gray-50 border border-gray-200 text-gray-700 py-1.5 px-3 rounded-lg outline-none focus:border-brand-500 cursor-pointer" onchange="renderRankings()">
+                        <option value="0">All CGPA</option>
+                        <option value="9">≥ 9</option>
+                        <option value="8">≥ 8</option>
+                        <option value="7">≥ 7</option>
+                        <option value="6">≥ 6</option>
+                    </select>
+                    
+                    <select id="filter-level" class="bg-gray-50 border border-gray-200 text-gray-700 py-1.5 px-3 rounded-lg outline-none focus:border-brand-500 cursor-pointer" onchange="renderRankings()">
+                        <option value="all">All Levels</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Beginner">Beginner</option>
+                    </select>
+                    
+                    <select id="filter-projects" class="bg-gray-50 border border-gray-200 text-gray-700 py-1.5 px-3 rounded-lg outline-none focus:border-brand-500 cursor-pointer" onchange="renderRankings()">
+                        <option value="all">All Projects</option>
+                        <option value="relevant">Has Relevant Projects</option>
+                        <option value="3+">3+ Projects</option>
+                        <option value="1+">1+ Projects</option>
+                    </select>
+
+                    <select id="filter-top-n" class="bg-gray-50 border border-gray-200 text-gray-700 py-1.5 px-3 rounded-lg outline-none focus:border-brand-500 cursor-pointer" onchange="renderRankings()">
+                        <option value="all">Number of Students</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                        <option value="10-50">10-50</option>
+                        <option value="50-70">50-70</option>
+                    </select>
+
+                    <button onclick="clearFilters()" class="ml-auto text-brand-500 hover:text-brand-700 font-medium px-3 hidden" id="clear-filters-btn">Clear Filters <i class="fas fa-times"></i></button>
+                </div>
+
+                <div class="space-y-4" id="rankings-container">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MANAGE JOBS TAB -->
+        <div id="tab-manage-jobs" class="hidden animate-fade-in max-w-4xl mx-auto">
+            <div class="flex justify-between mb-8 pb-4 border-b border-gray-200">
+                <h2 class="text-2xl font-bold text-brand-900">Manage Job Postings</h2>
+            </div>
+            
+            <form onsubmit="postNewJob(event)" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+                <h3 class="font-bold text-gray-900 text-lg mb-6"><i class="fas fa-plus-circle text-brand-500"></i> Create New Job Posting</h3>
+                
+                <div class="space-y-5">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Job Title</label>
+                        <input type="text" id="job-title" required placeholder="e.g. Frontend Developer" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Company / Team</label>
+                        <input type="text" id="job-company" placeholder="e.g. Google or Internal Placement Cell" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Job Description</label>
+                        <textarea id="job-desc" required rows="3" placeholder="Describe the role and responsibilities..." class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500"></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Minimum CGPA required (0-10)</label>
+                            <input type="number" id="job-cgpa" step="0.1" value="0" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Required Skills (Comma separated)</label>
+                            <input type="text" id="job-skills" required placeholder="e.g. Python, React, SQL" class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 pt-6 border-t border-gray-100 flex justify-end">
+                    <button type="submit" id="btn-post-job" class="bg-brand-900 text-white px-6 py-2.5 rounded-lg text-sm font-medium shadow-sm hover:bg-gray-800 transition flex items-center gap-2">
+                        <span id="btn-post-job-text">Publish Job</span> <i class="fas fa-paper-plane text-xs"></i>
+                    </button>
+                    <!-- Hidden field for keeping track of edit vs create -->
+                    <input type="hidden" id="edit-job-id" value="">
+                </div>
+            </form>
+
+            <div class="mt-10">
+                <h3 class="font-bold text-gray-900 text-xl mb-4">Existing Postings</h3>
+                <div class="space-y-4" id="manage-jobs-list">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ALL STUDENTS TAB -->
+        <div id="tab-all-students" class="hidden animate-fade-in">
+            <h2 class="text-2xl font-bold text-brand-900 mb-8 pb-4 border-b border-gray-200">Student Directory</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="all-students-container">
+                <!-- Pooulated by JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const isLocalhost = window.location.hostname === "localhost";
+        const API_URL = isLocalhost ? 'http://localhost:8000/api' : 'http://127.0.0.1:8000/api';
+        const token = localStorage.getItem('token');
+        
+        let studentsData = [];
+        let jobsData = [];
+        let matchesData = {};
+        let selectedJobId = null;
+
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        function switchTab(tabId) {
+            ['dashboard', 'manage-jobs', 'all-students'].forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`nav-${id}`).classList.remove('active');
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`nav-${tabId}`).classList.add('active');
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            window.location.href = 'index.html';
+        }
+
+        // --- Data Fetching ---
+        async function loadDashboardData() {
+            try {
+                // Fetch stats and user info
+                const [studentsRes, jobsRes, matchesRes, meRes] = await Promise.all([
+                    fetch(`${API_URL}/admin/students`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    fetch(`${API_URL}/admin/jobs`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    fetch(`${API_URL}/admin/matches`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    fetch(`${API_URL}/auth/me`, { headers: { 'Authorization': `Bearer ${token}` } })
+                ]);
+
+                if(studentsRes.status === 401) return logout();
+
+                studentsData = await studentsRes.json();
+                jobsData = await jobsRes.json();
+                const allMatchesArray = await matchesRes.json();
+                const meData = await meRes.ok ? await meRes.json() : { name: "Admin" };
+                
+                // Group matches by Job ID for fast lookup
+                matchesData = {};
+                allMatchesArray.forEach(m => {
+                    if(!matchesData[m.job_id]) matchesData[m.job_id] = [];
+                    matchesData[m.job_id].push(m);
+                });
+
+                document.getElementById('stat-students').innerText = studentsData.length;
+                document.getElementById('stat-jobs').innerText = jobsData.length;
+                document.getElementById('stat-matches').innerText = allMatchesArray.length > 0 ? allMatchesArray.length : '0';
+                
+                // For nav
+                document.getElementById('nav-admin-name').innerText = meData.role === 'admin' ? "Kantayapalem Meghana" : meData.name;
+
+                renderJobSelector();
+                renderAllStudents();
+                renderManageJobsList();
+
+            } catch(error) {
+                console.error("Dashboard Load Error:", error);
+            }
+        }
+
+        async function recomputeMatches() {
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+            document.getElementById('loadingOverlay').classList.add('flex');
+            
+            try {
+                const res = await fetch(`${API_URL}/admin/recompute-matches`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                
+                if(res.ok) {
+                    await loadDashboardData(); // reload Everything
+                    if(selectedJobId) {
+                        renderRankings(); // Re-render for currently selected job
+                    }
+                } else {
+                    alert("Failed to compute matches.");
+                }
+            } catch(error) {
+                alert("Network error.");
+            } finally {
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                document.getElementById('loadingOverlay').classList.remove('flex');
+            }
+        }
+
+        // --- UI Rendering ---
+        function renderJobSelector() {
+            const container = document.getElementById('job-selector-container');
+            
+            if (jobsData.length === 0) {
+                container.innerHTML = `<div class="col-span-2 text-center py-6 text-gray-500 bg-white rounded-xl border border-gray-100">No active job postings. Please create one.</div>`;
+                return;
+            }
+
+            container.innerHTML = jobsData.map(job => {
+                const reqSkills = typeof job.required_skills === 'string' ? job.required_skills.split(',') : (job.required_skills || []).map(s => s.skill || s);
+                const skillPills = reqSkills.slice(0,4).map(s => `<span class="bg-brand-50 text-brand-500 px-3 py-1 rounded-full text-xs font-bold leading-none tracking-wide">${s.trim()}</span>`).join('');
+                
+                // Extract company from description if formatted as "Company - Desc"
+                let company = "XYZ";
+                let desc = job.description || "No description provided.";
+                if(job.description && job.description.includes(" - ")) {
+                    const parts = job.description.split(" - ");
+                    company = parts[0];
+                    desc = parts.slice(1).join(" - ");
+                }
+                
+                return `
+                    <div id="job-card-${job.id}" onclick="selectJob(${job.id}, '${job.title}')" class="bg-white rounded-2xl p-6 border border-gray-200 job-card-selectable flex flex-col gap-3 hover:-translate-y-0.5 transition shadow-sm">
+                        <div class="flex items-center gap-3 justify-between">
+                            <div class="flex items-center gap-3">
+                                <h3 class="font-bold text-gray-900 text-lg">${job.title}</h3>
+                                <span class="bg-gray-50 text-gray-600 px-2.5 py-1 rounded-full text-xs font-semibold border border-gray-200">Full-time</span>
+                            </div>
+                        </div>
+                        <div class="text-sm text-gray-500 font-medium flex items-center gap-2">
+                            <span>${company}</span> <span class="text-gray-300">•</span> <i class="fas fa-map-marker-alt text-gray-400"></i> <span>BVRITH</span>
+                        </div>
+                        <p class="text-sm text-gray-600 line-clamp-2">${desc}</p>
+                        <div class="mt-2 flex flex-wrap gap-2">
+                            ${skillPills}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            // Auto-select first job if exists
+            if(jobsData.length > 0 && !selectedJobId) {
+                selectJob(jobsData[0].id, jobsData[0].title);
+            } else if (selectedJobId) {
+                 // re-highlight after reload
+                 const card = document.getElementById(`job-card-${selectedJobId}`);
+                 if(card) { card.classList.add('selected'); }
+            }
+        }
+
+        function selectJob(jobId, jobTitle) {
+            // UI Toggle
+            document.querySelectorAll('.job-card-selectable').forEach(el => el.classList.remove('selected'));
+            const card = document.getElementById(`job-card-${jobId}`);
+            if(card) card.classList.add('selected');
+
+            selectedJobId = jobId;
+            document.getElementById('rankings-header').innerHTML = `<i class="fas fa-chart-bar text-brand-500"></i> Ranked Candidates — ${jobTitle}`;
+            document.getElementById('rankings-section').classList.remove('hidden');
+            document.getElementById('rankings-section').classList.add('flex');
+            
+            renderRankings();
+        }
+
+        function clearFilters() {
+            document.getElementById('filter-cgpa').value = "0";
+            document.getElementById('filter-level').value = "all";
+            document.getElementById('filter-projects').value = "all";
+            document.getElementById('filter-top-n').value = "all";
+            renderRankings();
+        }
+
+        function renderRankings() {
+            const container = document.getElementById('rankings-container');
+            const cgpaFilter = parseFloat(document.getElementById('filter-cgpa').value);
+            const levelFilter = document.getElementById('filter-level').value;
+            const projectFilter = document.getElementById('filter-projects').value;
+            const topNFilter = document.getElementById('filter-top-n').value;
+            
+            // Show clear btn if active
+            const clearBtn = document.getElementById('clear-filters-btn');
+            if(cgpaFilter > 0 || levelFilter !== 'all' || projectFilter !== 'all' || topNFilter !== 'all') {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+
+            let matches = matchesData[selectedJobId] || [];
+            
+            // Map student data to match
+            let rankedList = matches.map(m => {
+                const s = studentsData.find(st => st.id === m.student_id);
+                return { ...m, student: s || {} };
+            });
+
+            // Filter
+            rankedList = rankedList.filter(item => {
+                const s = item.student;
+                if(s.role !== 'student') return false; // Safety
+                if(cgpaFilter > 0 && (s.cgpa || 0) < cgpaFilter) return false;
+                
+                if(levelFilter !== 'all') {
+                    const hasSkillLevel = s.skills && s.skills.some(skill => 
+                        skill.proficiency && skill.proficiency.toLowerCase() === levelFilter.toLowerCase()
+                    );
+                    if(!hasSkillLevel) return false;
+                }
+
+                if(projectFilter !== 'all') {
+                    const projectsCount = s.projects ? s.projects.length : 0;
+                    if(projectFilter === '3+' && projectsCount < 3) return false;
+                    if(projectFilter === '1+' && projectsCount < 1) return false;
+                    if(projectFilter === 'relevant' && (item.project_score === 0 || projectsCount === 0)) return false;
+                }
+                
+                return true;
+            });
+
+            // Sort by Match Score Descending
+            rankedList.sort((a,b) => (b.overall_match_percentage || 0) - (a.overall_match_percentage || 0));
+
+            // Apply Num Students filter
+            if (topNFilter !== 'all') {
+                if (topNFilter === '10-50') {
+                    rankedList = rankedList.slice(9, 50); // Using index 9 for 10th item (1-indexed meaning 10th to 50th)
+                } else if (topNFilter === '50-70') {
+                    rankedList = rankedList.slice(49, 70); // 50th to 70th item
+                } else {
+                    const limit = parseInt(topNFilter, 10);
+                    if (!isNaN(limit)) {
+                        rankedList = rankedList.slice(0, limit);
+                    }
+                }
+            }
+
+            if(rankedList.length === 0) {
+                container.innerHTML = `<div class="text-center py-10 bg-white rounded-xl border border-gray-100 text-gray-500">No candidates match the selected criteria for this job. AI match recomputation may be needed.</div>`;
+                return;
+            }
+
+            container.innerHTML = rankedList.map((item, index) => {
+                const s = item.student;
+                const score = Math.round(item.overall_match_percentage || 0);
+                const skillsScore = Math.round(item.semantic_skill_score || 0);
+                const cgpaScore = Math.round(item.cgpa_score || 0);
+                const projScore = Math.round(item.project_score || 0);
+                
+                // Parse matched skills properly to show proficiency if available
+                const matchPills = item.matched_skills.map(skill => `<span class="bg-brand-50 text-brand-500 font-medium px-3 py-1 rounded-full flex items-center gap-1">${skill.replace('(', '• ').replace(')', '')}</span>`).join('');
+                
+                let missingHtml = "";
+                if(item.missing_skills && item.missing_skills.length > 0) {
+                    missingHtml = `
+                    <div class="mt-4">
+                        <span class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 block">Missing Skills</span>
+                        <div class="flex flex-wrap gap-2 text-xs">
+                            ${item.missing_skills.map(skill => `<span class="text-gray-400 font-medium px-3 py-1 rounded-full border border-gray-200 border-dashed">${skill}</span>`).join('')}
+                        </div>
+                    </div>`;
+                }
+
+                return `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200 flex flex-col md:flex-row justify-between gap-6 relative transition hover:shadow-md">
+                        <div class="flex-1">
+                            <div class="flex items-center gap-4 mb-2">
+                                <div class="w-10 h-10 rounded-full bg-brand-50 text-brand-900 font-bold flex items-center justify-center shrink-0 border border-brand-100">
+                                    #${index + 1}
+                                </div>
+                                <div class="flex items-center gap-3 flex-wrap">
+                                    <h3 class="text-xl font-bold text-gray-900">${s.full_name || 'Student'}</h3>
+                                    <span class="text-sm border border-gray-200 text-gray-600 px-3 py-0.5 rounded-full font-medium ${!s.department ? 'hidden' : ''}">${s.department}</span>
+                                    <span class="text-sm text-gray-500 font-medium ${!s.year ? 'hidden' : ''}">${s.year}</span>
+                                </div>
+                            </div>
+                            
+                            <div class="text-sm text-gray-600 font-bold mb-6 flex items-center gap-2 pl-[56px]">
+                                <i class="fas fa-graduation-cap text-gray-400"></i> CGPA: <span class="text-gray-900">${s.cgpa || 'N/A'}</span>
+                            </div>
+                            
+                            <div>
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-widest mb-3 block">Matched Skills</span>
+                                <div class="flex flex-wrap gap-2 text-xs">
+                                    ${matchPills || '<span class="text-gray-400 italic font-medium px-3 py-1">No skills matched</span>'}
+                                </div>
+                            </div>
+                            
+                            ${missingHtml}
+                        </div>
+                        
+                        <div class="md:w-64 flex flex-col justify-end pt-4 md:pt-0">
+                            <div class="flex justify-end mb-1">
+                                <span class="text-[32px] font-bold text-${score >= 60 ? 'brand-500' : 'orange-400'} leading-none">${score}%</span>
+                            </div>
+                            
+                            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2 mt-2">
+                                <div class="bg-${score >= 60 ? 'brand-500' : 'orange-400'} h-1.5 rounded-full" style="width: ${score}%"></div>
+                            </div>
+                            
+                            <div class="flex justify-between text-[11px] text-gray-500 font-medium uppercase tracking-wider mt-1">
+                                <span>${skillsScore}% skills</span>
+                                <span>${cgpaScore}% CGPA</span>
+                                <span>${projScore}% projects</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function renderAllStudents() {
+            const container = document.getElementById('all-students-container');
+            if(studentsData.length === 0) {
+                container.innerHTML = `<div class="col-span-3 text-center py-10 text-gray-500">No students registered yet.</div>`;
+                return;
+            }
+            
+            container.innerHTML = studentsData.map(s => {
+                const skills = s.skills ? s.skills.slice(0, 3).map(skill => `<span class="skill-pill-gray">${skill.skill_name}</span>`).join('') : '';
+                const extra = (s.skills && s.skills.length > 3) ? `<span class="text-xs text-gray-400">+${s.skills.length - 3}</span>` : '';
+                
+                return `
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col hover:shadow-md transition">
+                        <div class="w-14 h-14 bg-brand-50 rounded-full flex items-center justify-center text-xl text-brand-500 mb-4 font-bold">
+                            ${(s.full_name || 'U').charAt(0)}
+                        </div>
+                        <h3 class="font-bold text-gray-900">${s.full_name || 'Anonymous Student'}</h3>
+                        <p class="text-sm text-gray-500 mb-2">${s.roll_number || 'N/A'}</p>
+                        
+                        <div class="text-xs font-medium bg-gray-50 text-gray-600 block self-start px-2 py-1 rounded mb-4">
+                            ${s.department || 'No Dept'} • CGPA: ${s.cgpa || 'N/A'}
+                        </div>
+                        
+                        <div class="mt-auto">
+                            <span class="text-[10px] uppercase font-bold text-gray-400 mb-1 block">Top Skills</span>
+                            <div class="flex flex-wrap gap-1 items-center">
+                                ${skills || '<span class="text-xs italic text-gray-400">No skills</span>'}
+                                ${extra}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function parseSkillsToText(skillsData) {
+            if (!skillsData) return '';
+            if (typeof skillsData === 'string') {
+                try {
+                    const parsed = JSON.parse(skillsData);
+                    if (Array.isArray(parsed)) return parsed.map(s => s.skill || s).join(', ');
+                } catch(e) {}
+                return skillsData;
+            }
+            if (Array.isArray(skillsData)) return skillsData.map(s => s.skill || s).join(', ');
+            return '';
+        }
+
+        function renderManageJobsList() {
+            const container = document.getElementById('manage-jobs-list');
+            if(jobsData.length === 0) {
+                container.innerHTML = `<div class="p-6 text-center text-gray-500 bg-gray-50 rounded-xl border border-gray-100">No jobs posted yet.</div>`;
+                return;
+            }
+
+            container.innerHTML = jobsData.map(job => {
+                const reqSkills = parseSkillsToText(job.required_skills);
+                return `
+                    <div class="bg-white p-5 rounded-xl border border-gray-200 flex flex-col md:flex-row justify-between gap-4 items-start md:items-center">
+                        <div>
+                            <h4 class="font-bold text-gray-900">${job.title}</h4>
+                            <p class="text-sm text-gray-500 mt-1">${job.description ? job.description.substring(0, 100) + '...' : 'No description'}</p>
+                            <div class="mt-2 flex gap-3 text-xs font-medium text-gray-600">
+                                <span><i class="fas fa-graduation-cap"></i> Min CGPA: ${job.min_cgpa || 'None'}</span>
+                                <span><i class="fas fa-code"></i> Skills: ${reqSkills}</span>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 shrink-0">
+                            <button onclick="editJob(${job.id})" class="px-3 py-1.5 bg-brand-50 text-brand-600 rounded-lg text-sm font-medium hover:bg-brand-100 transition">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button onclick="deleteJob(${job.id})" class="px-3 py-1.5 bg-red-50 text-red-600 rounded-lg text-sm font-medium hover:bg-red-100 transition">
+                                <i class="fas fa-trash"></i> Delete
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function editJob(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            if(!job) return;
+
+            document.getElementById('edit-job-id').value = job.id;
+            document.getElementById('job-title').value = job.title;
+            
+            // Extract company from description if formatted as "Company - Desc"
+            let company = "";
+            let desc = job.description;
+            if(desc.includes(" - ")) {
+                const parts = desc.split(" - ");
+                company = parts[0];
+                desc = parts.slice(1).join(" - ");
+            }
+            
+            document.getElementById('job-company').value = company;
+            document.getElementById('job-desc').value = desc;
+            document.getElementById('job-cgpa').value = job.min_cgpa || 0;
+            
+            const reqSkills = parseSkillsToText(job.required_skills);
+            document.getElementById('job-skills').value = reqSkills;
+
+            document.getElementById('btn-post-job-text').innerText = "Update Job";
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        async function deleteJob(jobId) {
+            if(!confirm("Are you sure you want to delete this job posting? This will also remove all AI matches associated with it.")) return;
+            
+            try {
+                const res = await fetch(`${API_URL}/admin/job/${jobId}`, {
+                    method: 'DELETE',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                if(res.ok) {
+                    await loadDashboardData();
+                } else {
+                    alert("Failed to delete job.");
+                }
+            } catch(e) {
+                alert("Network error deleting job.");
+            }
+        }
+
+        async function postNewJob(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-post-job');
+            const btnText = document.getElementById('btn-post-job-text');
+            const originalText = btnText.innerText;
+            
+            btn.innerHTML = '<span>Saving...</span><i class="fas fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+
+            const skillsArr = document.getElementById('job-skills').value.split(',').map(s => s.trim()).filter(s => s);
+            const reqSkills = skillsArr.map(s => ({ skill: s, proficiency: "Intermediate" }));
+
+            const payload = {
+                title: document.getElementById('job-title').value,
+                description: document.getElementById('job-company').value ? 
+                             `${document.getElementById('job-company').value} - ${document.getElementById('job-desc').value}` :
+                             document.getElementById('job-desc').value,
+                min_cgpa: parseFloat(document.getElementById('job-cgpa').value) || 0,
+                required_skills: reqSkills
+            };
+
+            const editId = document.getElementById('edit-job-id').value;
+            const method = editId ? 'PUT' : 'POST';
+            const url = editId ? `${API_URL}/admin/job/${editId}` : `${API_URL}/admin/job`;
+
+            try {
+                 const res = await fetch(url, {
+                    method: method,
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}` 
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (res.ok) {
+                    alert(`Job ${editId ? 'Updated' : 'Posted'} Successfully!`);
+                    e.target.reset();
+                    document.getElementById('edit-job-id').value = "";
+                    const btnSpan = document.getElementById('btn-post-job-text');
+                    if (btnSpan) btnSpan.innerText = "Publish Job";
+                    await loadDashboardData();
+                } else {
+                    const errorText = await res.text();
+                    alert(`Failed to ${editId ? 'update' : 'post'} job: ${res.status} ${errorText}`);
+                }
+
+            } catch(err) {
+                console.error("Submission Error:", err);
+                alert("Network Error or Client Exception: " + err.message);
+            } finally {
+                btn.innerHTML = `<span id="btn-post-job-text">${editId ? 'Publish Job' : originalText}</span> <i class="fas fa-paper-plane text-xs"></i>`;
+                btn.disabled = false;
+            }
+        }
+
+        // Init Flow
+        loadDashboardData();
+
+    </script>
+</body>
+</html>

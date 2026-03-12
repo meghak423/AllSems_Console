@@ -1,0 +1,30 @@
+<html lang="en">
+
+<head>
+    <title>Demo4</title>
+    <script>
+        function sum() {
+            let num1 = document.getElementById("num1").value;
+            var num2 = document.getElementById("num2").value;
+
+            num1 = parseInt(num1);
+            num2 = parseInt(num2);
+
+            let sum = num1 + num2;
+
+            document.getElementById("result").innerHTML = "Sum = " + sum;
+        }
+    </script>
+</head>
+
+<body>
+    <h1 id="header1">Welcome to JavaScript</h1>
+
+    Enter Number-1: <input type="text" id="num1" /> <br />
+    Enter Number-2: <input type="text" id="num2" /> <br />
+    <button onclick="sum()">Find Sum</button> <br />
+
+    <h1 id="result"></h1>
+</body>
+
+</html>

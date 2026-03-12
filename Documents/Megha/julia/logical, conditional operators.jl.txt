@@ -1,0 +1,23 @@
+# Program demonstrating logical operators
+a = true        # Define variables
+b = false
+println("Logical AND:")    
+println("$a && $b = ", a && b)
+println("\nLogical OR:")       # Logical OR
+println("$a || $b = ", a || b)
+println("\nLogical NOT:")  # Logical NOT
+println("!$a = ", !a)
+output: Logical AND: true && false = false
+	Logical OR:  true || false = true
+	Logical NOT: !true = false
+# Program demonstrating conditional expressions
+x = 10      # Define variables
+result = x > 5 ? "x is greater than 5" : "x is not greater than 5"    # Using ternary operator
+println("Using ternary operator: ", result)
+if x > 5        # Using if-else statement
+    println("Using if-else statement: x is greater than 5")
+else
+    println("Using if-else statement: x is not greater than 5")
+end
+output: Using ternary operator: x is greater than 5
+	Using if-else statement: x is greater than 5

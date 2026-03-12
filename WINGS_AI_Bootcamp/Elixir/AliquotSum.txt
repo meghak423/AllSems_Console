@@ -1,0 +1,15 @@
+defmodule Math do
+  def aliquot_sum(n), do: sum_divisors(n, 1, 0)
+
+  defp sum_divisors(n, i, acc) when i >= n, do: acc
+  defp sum_divisors(n, i, acc) do
+    if rem(n, i) == 0 do
+      sum_divisors(n, i + 1, acc + i)
+    else
+      sum_divisors(n, i + 1, acc)
+    end
+  end
+end
+
+IO.puts(Math.aliquot_sum(12))  # Output: 16
+

@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <title>Demo10</title>
+    <script>
+
+        //JSON Object - JavaScript Object Notation
+        let user = {
+            "id": 101,
+            "name": "Harsha",
+            "age": 33,
+            "hobbies": ['Running', 'Reading', 'Music', 'Movies'],
+
+            "address": {
+                "streetNo": 55,
+                "city": "Hyderabad",
+                "state": "Telangana"
+            }
+        };
+
+        function showUser() {
+            let result = "";
+
+            result += "ID: "   + user.id  + "<br/>";
+            result += "Name: " + user.name + "<br/>";
+            result += "Age: "  + user.age  + "<br/><br/>";
+
+            result += "<b><u>Hobbies</u></b>";
+
+            result += "<ul>";
+            for (let hobby of user.hobbies) {
+                result += "<li>" + hobby + "</li>";
+            }
+            result += "</ul> <br/><br/>";
+
+
+            result += "<b><u>Address</u></b><br/>";
+            result += "StreetNo: " + user.address.streetNo + "<br/>";
+            result += "City: "     + user.address.city     + "<br/>";
+            result += "State: "    + user.address.state    + "<br/><br/>";
+
+            document.getElementById("para1").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    <h1 id="header1">Welcome to JavaScript</h1>
+    <button onclick="showUser()">Show User</button> <br />
+    <p id="para1"></p>
+</body>
+</html>

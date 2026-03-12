@@ -1,0 +1,53 @@
+High Package Placement Preparation Group(H3PG) (Target: 20+ LPA Opportunities)
+
+6/3/26
+
+226 - Invert Binary tree
+543 - Diameter of BT
+1022 - Sum of Root to Leaf BT
+865 - Smallest Subtree with Deepest nodes
+1161 - Maximum level sum of BT
+230 - 
+1339 - 
+606 - 
+652 - 
+95 - 
+669 - 
+
+
+7/3/26
+
+230 - 
+669 - 
+863 - 
+652 -
+
+
+				CODENOW 
+
+
+9/3/26
+
+560 -  Subarray Sum Equals K
+974 - 
+325 - 
+523 - 
+
+
+10/3/26
+
+1109 - 
+1094 - 
+
+3129 - today leetcode daily prbm
+
+
+
+
+
+
+
+
+
+
+ 

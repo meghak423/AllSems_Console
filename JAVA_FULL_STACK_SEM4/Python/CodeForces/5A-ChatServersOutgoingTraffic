@@ -1,0 +1,30 @@
+def chat_server_traffic(commands):
+   
+    chat = set()
+    total_traffic = 0
+
+    for command in commands:
+        if command[0] == '+':
+           
+            chat.add(command[1:])
+        elif command[0] == '-':
+           
+            chat.remove(command[1:])
+        else:
+            sender, message = command.split(":", 1)
+           
+            total_traffic += len(message) * len(chat)
+    
+    return total_traffic
+
+commands = []
+while True:
+    try:
+        command = input().strip()
+        if command == '':
+            break
+        commands.append(command)
+    except EOFError:
+        break
+
+print(chat_server_traffic(commands))

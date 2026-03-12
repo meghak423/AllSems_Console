@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\BVRITH\FSD\Springboot\demo"/>
+		<item value="C:\BVRITH\FSD\Springboot\Demo"/>
+		<item value="C:\Users\kantayapalem\workspace\SpringBoot"/>
+	</list>
+	<section name="NewWizardAction">
+	</section>
+</section>

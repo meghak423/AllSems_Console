@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <title>Demo8</title>
+    <script>
+        
+        let arr = [10, 20, 30, 40, 50];
+
+        function showArray() {
+            let result = "<b><u>Using For Loop</u></b><br/>";
+
+            for (let i = 0; i < arr.length; i++) {
+                result += "arr[" + i + "] = " + arr[i] + "<br/>"
+            }
+            result += "<br/>";
+
+            result += "<b><u>Using Foreach Loop</u></b><br/>";
+            for (let ar of arr) {
+                result += ar + ", ";
+            }
+
+            result = result.substring(0, result.length - 2);
+            document.getElementById("para1").innerHTML = result;
+        }
+
+    </script>
+</head>
+<body>
+    <h1>Welcome to JavaScript</h1>
+    <button onclick="showArray()">Show Array</button> <br />
+
+    <p id="para1"></p>
+</body>
+</html>

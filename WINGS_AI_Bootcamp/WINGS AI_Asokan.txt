@@ -1,0 +1,18 @@
+1.WAP a number getting from subtracting the largest num and smallest num from given digits.Generate sequence like this.
+1729 - num
+9721 - 1279 = 8442
+8442 - 2448 = 5994
+i need a sequence like this 1729 8442 5994 and so on as output 
+
+* Correct, Readable, Changable, Testable
+
+2.Collatz senquence
+   160,80,40,20,10,5,16,8,4,2,1,4,2,1.....
+   
+3.amount rounded to the nearest 5 rupee amount
+  Ex: 42 rupees 73 paise = 45
+  
+4.Write function that computes the digital root of a given integer
+5.Write function to check whether given num is power of 2 or not.
+6.Given an integer return the largest power of 2 from collatz sequence.
+7.Passcode Derivation prbm - in Project Euler

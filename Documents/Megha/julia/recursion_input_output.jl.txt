@@ -1,0 +1,16 @@
+function factorial(n)   # Program demonstrating recursion
+    if n == 0
+        return 1
+    else
+        return n * factorial(n - 1)
+    end
+end
+n = 5        # Call the factorial function
+println("Factorial of $n is ", factorial(n))
+output:  Factorial of 5 is 120
+println("Enter your name:")        # Input        # Program demonstrating input and output
+name = readline()
+println("Hello, $name! Welcome to Julia programming.")            # Output
+output:  Enter your name:
+John
+Hello, John! Welcome to Julia programming.

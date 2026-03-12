@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+    <title>Demo9</title>
+    <script>
+
+        let arr = [];
+
+        function add() {
+            let num = document.getElementById("num1").value;
+
+            if (num.length != 0) {
+                let result = arr.push(num);
+                document.getElementById("para1").innerHTML = num + " added to Array";
+            } else {
+                document.getElementById("para1").innerHTML = "Enter a Number to Add";
+            }
+        }
+
+        function remove() {
+            let num = document.getElementById("num1").value;
+
+            if (arr.length != 0) {
+                if (num.length != 0) {
+
+                    const index = arr.findIndex((x) => {
+                        return x == num;
+                    });
+                    arr.splice(index, 1);
+
+                    document.getElementById("para1").innerHTML = num + " Removed from Array";
+
+                } else {
+                    document.getElementById("para1").innerHTML = "Enter a Number to Remove";
+                }
+            } else {
+                document.getElementById("para1").innerHTML = "Array is Empty!!!";
+            }
+        }
+
+        function showArray() {
+            let result = "";
+
+            if (arr.length != 0) {
+                for (let ar of arr) {
+                    result += ar + ", ";
+                }
+                result = result.substring(0, result.length - 2);
+                document.getElementById("para1").innerHTML = result;
+            } else {
+                document.getElementById("para1").innerHTML = "Empty Array!!!";
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <h1>Welcome to JavaScript</h1>
+
+    Enter Value: <input type="text" id="num1" /> <br /><br />
+
+    &nbsp;&nbsp;
+    <button onclick="add()">Add</button> &nbsp;
+    <button onclick="remove()">Remove</button> &nbsp;
+    <button onclick="showArray()">Show Array</button> <br />
+
+    <p id="para1"></p>
+</body>
+
+</html>
+

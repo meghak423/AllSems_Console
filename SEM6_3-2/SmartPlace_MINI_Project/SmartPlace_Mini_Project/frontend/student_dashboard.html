@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - SmartPlace</title>
+    <!-- Modern Fonts matching Lovable -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6', // Teal
+                            600: '#0d9488',
+                            900: '#1e293b', // Dark Slate for headers
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+        }
+
+        .glass-nav {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .skill-pill {
+            background: #f0fdfa;
+            color: #14b8a6;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .skill-pill-gray {
+            background: #f1f5f9;
+            color: #64748b;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .nav-link {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #475569;
+        }
+
+        .nav-link:hover {
+            background: #f1f5f9;
+        }
+
+        .nav-link.active {
+            background: #14b8a6;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col font-sans text-gray-800">
+
+    <!-- Top Navigation -->
+    <nav class="glass-nav sticky top-0 z-50 px-6 py-3 flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-2 cursor-pointer">
+            <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center">
+                <i class="fas fa-brain text-white text-sm"></i>
+            </div>
+            <span class="font-bold text-lg text-brand-900 tracking-tight">SmartPlace</span>
+        </div>
+
+        <div class="hidden md:flex items-center gap-2">
+            <div class="nav-link active" onclick="switchTab('dashboard')" id="nav-dashboard">
+                <i class="fas fa-th-large"></i> Dashboard
+            </div>
+            <div class="nav-link" onclick="switchTab('upload')" id="nav-upload">
+                <i class="fas fa-upload"></i> Upload Resume
+            </div>
+            <div class="nav-link" onclick="switchTab('jobs')" id="nav-jobs">
+                <i class="fas fa-briefcase"></i> Browse Jobs
+            </div>
+            <div class="nav-link" onclick="switchTab('profile')" id="nav-profile">
+                <i class="fas fa-user-edit"></i> My Profile
+            </div>
+        </div>
+
+        <div class="flex gap-4 items-center">
+            <span class="text-sm font-medium text-gray-600 hidden sm:block" id="nav-student-name">Student</span>
+            <button onclick="logout()"
+                class="text-sm font-medium text-gray-500 hover:text-red-500 transition flex items-center gap-2">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 max-w-5xl w-full mx-auto p-6 md:p-8">
+
+        <!-- DASHBOARD TAB -->
+        <div id="tab-dashboard" class="space-y-8 animate-fade-in block">
+
+            <!-- Profile Overview Card -->
+            <div
+                class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <h1 class="text-2xl font-bold text-brand-900 mb-1" id="dash-name">Loading Profile...</h1>
+                    <p class="text-gray-500 text-sm mb-4" id="dash-course">Upload your resume to complete your profile.
+                    </p>
+
+                    <div class="flex flex-wrap gap-2" id="dash-skills-container">
+                        <!-- Skills will populate here -->
+                        <span class="skill-pill-gray">No resume uploaded yet</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-end gap-3 min-w-[200px]" id="resume-status-container">
+                    <!-- Dynamic Resume Status -->
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center flex flex-col items-center justify-center">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fas fa-chart-bar"></i></div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1" id="stat-skills">0</div>
+                    <div class="text-xs text-gray-500 font-medium tracking-wide uppercase">Skills Found</div>
+                </div>
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center flex flex-col items-center justify-center">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fas fa-briefcase"></i></div>
+                    <div class="text-3xl font-bold text-gray-900 mb-1" id="stat-jobs">0</div>
+                    <div class="text-xs text-gray-500 font-medium tracking-wide uppercase">Job Matches</div>
+                </div>
+                <div
+                    class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 text-center flex flex-col items-center justify-center">
+                    <div class="text-brand-500 text-xl mb-3"><i class="fas fa-arrow-trend-up"></i></div>
+                    <div class="text-3xl font-bold text-brand-500 mb-1" id="stat-match">0%</div>
+                    <div class="text-xs text-brand-600 font-medium tracking-wide uppercase">Top Match Score</div>
+                </div>
+            </div>
+
+            <!-- Job Matches Section -->
+            <div>
+                <h2 class="text-lg font-bold text-brand-900 mb-4 flex items-center gap-2">
+                    <i class="fas fa-cube text-brand-500"></i> Your Job Matches
+                </h2>
+
+                <div class="space-y-4" id="jobs-container-dashboard">
+                    <div class="text-center py-10 bg-white rounded-2xl border border-gray-100 text-gray-500 text-sm">
+                        Please upload your resume to see personalized job matches!
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- UPLOAD RESUME TAB -->
+        <div id="tab-upload" class="hidden animate-fade-in max-w-3xl mx-auto">
+            <div class="mb-8 text-center pt-8">
+                <h2 class="text-3xl font-bold text-brand-900 mb-2">Upload Resume</h2>
+                <p class="text-gray-500 text-sm">Upload your resume and our AI will extract your skills with proficiency
+                    levels automatically.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl p-10 shadow-sm border border-gray-100 text-center">
+                <form id="uploadForm"
+                    class="flex flex-col items-center justify-center border-2 border-dashed border-gray-200 rounded-xl p-12 hover:bg-gray-50 hover:border-brand-300 transition-colors cursor-pointer"
+                    onclick="document.getElementById('resumeFile').click()">
+
+                    <div
+                        class="w-16 h-16 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center text-2xl mb-4">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                    </div>
+
+                    <h3 class="text-lg font-semibold text-gray-800 mb-1">Drop your resume here</h3>
+                    <p class="text-sm text-gray-400 mb-6">PDF, TXT, or DOCX (max 5MB)</p>
+
+                    <input type="file" id="resumeFile" accept="application/pdf" class="hidden"
+                        onchange="handleFileSelect(event)">
+
+                    <button type="button"
+                        class="px-6 py-2 bg-white border border-gray-200 shadow-sm rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">
+                        Browse Files
+                    </button>
+
+                    <p id="selectedFileName" class="mt-4 text-sm font-medium text-brand-600 hidden"></p>
+                </form>
+
+                <div class="mt-8 flex justify-end hidden" id="uploadActions">
+                    <button onclick="uploadResume()" id="uploadBtn"
+                        class="bg-brand-500 text-white px-6 py-2.5 rounded-lg text-sm font-medium shadow-sm hover:bg-brand-600 transition flex items-center gap-2">
+                        <span>Process Resume with AI</span>
+                        <i class="fas fa-magic"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BROWSE JOBS TAB -->
+        <div id="tab-jobs" class="hidden animate-fade-in">
+            <div class="mb-8">
+                <h2 class="text-3xl font-extrabold text-brand-900 mb-2">Browse Jobs</h2>
+                <p class="text-gray-500 text-sm">Explore available job postings and see your match scores</p>
+            </div>
+
+            <div id="jobs-list-view">
+                <div class="relative mb-8">
+                    <i class="fas fa-search absolute left-4 top-3.5 text-gray-400"></i>
+                    <input type="text" placeholder="Search jobs by title or company..."
+                        class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-brand-500 outline-none shadow-sm text-sm">
+                </div>
+
+                <div class="space-y-4" id="jobs-container-browse">
+                    <!-- Reused Job cards will go here -->
+                </div>
+            </div>
+
+            <!-- Job Details View -->
+            <div id="job-details-view" class="hidden animate-fade-in relative -mt-4">
+                <button onclick="closeJobDetails()"
+                    class="text-sm font-medium text-gray-500 hover:text-gray-800 transition mb-6 flex items-center gap-2">
+                    <i class="fas fa-arrow-left"></i> Back to Jobs
+                </button>
+
+                <div id="job-details-content">
+                    <!-- Dynamically populated by JS viewJobDetails(id) -->
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mt-6">
+                    <h3 class="font-bold text-gray-900 mb-4">Required Skills</h3>
+                    <div id="job-details-req-skills" class="flex flex-wrap gap-3 mb-8">
+                        <!-- Dynamically populated -->
+                    </div>
+
+                    <div class="flex flex-wrap gap-4">
+                        <button id="btn-recompute" onclick="recomputeMatch()"
+                            class="px-5 py-2.5 bg-white border border-gray-200 shadow-sm rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 flex items-center gap-2 transition">
+                            <i class="fas fa-sync-alt text-gray-400"></i> Recompute Match
+                        </button>
+                        <button id="btn-get-ai" onclick="getAiRecommendations()"
+                            class="px-5 py-2.5 bg-brand-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 shadow-sm flex items-center gap-2 transition">
+                            <i class="fas fa-sparkles text-yellow-300"></i> Get AI Recommendations
+                        </button>
+                    </div>
+
+                    <!-- AI Recommendations Container -->
+                    <div id="ai-recs-container" class="mt-8 pt-8 border-t border-gray-100 hidden">
+                        <h3 class="font-bold text-gray-900 text-lg mb-4 flex items-center gap-2">
+                            <i class="fas fa-sparkles text-brand-500"></i> AI Career Recommendations
+                        </h3>
+                        <div id="ai-recs-content"
+                            class="text-sm text-gray-700 space-y-4 leading-relaxed bg-brand-50/50 p-6 rounded-xl border border-brand-100">
+                            <!-- Populated with Markdown-to-HTML response -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MY PROFILE TAB -->
+        <div id="tab-profile" class="hidden animate-fade-in max-w-4xl mx-auto">
+            <div class="mb-8 text-center md:text-left flex items-center gap-3">
+                <i class="far fa-user text-brand-500 text-xl"></i>
+                <h2 class="text-2xl font-bold text-brand-900">Edit Profile</h2>
+            </div>
+
+            <form onsubmit="updateProfile(event)" class="space-y-6">
+
+                <!-- Personal Info Card -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="border-b border-gray-100 bg-gray-50/50 px-6 py-4 flex items-center gap-2">
+                        <i class="fas fa-graduation-cap text-brand-500"></i>
+                        <h3 class="font-semibold text-gray-800">Personal Info</h3>
+                    </div>
+
+                    <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Full Name</label>
+                            <input type="text" id="prof-name"
+                                class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">College Roll
+                                No</label>
+                            <input type="text" id="prof-roll" class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 focus:bg-white outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Branch /
+                                Department</label>
+                            <select id="prof-dept"
+                                class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500">
+                                <option value="">Select Department</option>
+                                <option value="Computer Science (CSE)">Computer Science (CSE)</option>
+                                <option value="Information Technology (IT)">Information Technology (IT)</option>
+                                <option value="Electronics (ECE)">Electronics (ECE)</option>
+                                <option value="Electrical (EEE)">Electrical (EEE)</option>
+                                <option value="Mechanical (MECH)">Mechanical (MECH)</option>
+                                <option value="Civil (CE)">Civil (CE)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Graduation
+                                Year</label>
+                            <select id="prof-year"
+                                class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500">
+                                <option value="">Select Year</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                                <option value="2031">2031</option>
+                                <option value="2032">2032</option>
+                                <option value="2033">2033</option>
+                                <option value="2034">2034</option>
+                                <option value="2035">2035</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">CGPA (out of
+                                10)</label>
+                            <input type="number" step="0.01" id="prof-cgpa" placeholder="9.5"
+                                class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 uppercase mb-2">Phone Number</label>
+                            <input type="text" id="prof-phone" placeholder="9876543210"
+                                class="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:bg-white outline-none focus:border-brand-500">
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4 border-t border-gray-100 bg-gray-50 text-right">
+                        <button type="submit"
+                            class="bg-brand-900 text-white px-5 py-2 rounded-lg text-sm font-medium hover:bg-gray-800 transition">Save
+                            Changes</button>
+                    </div>
+                </div>
+
+                <!-- Skills List Card -->
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="border-b border-gray-100 bg-gray-50/50 px-6 py-4 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-laptop-code text-brand-500"></i>
+                            <h3 class="font-semibold text-gray-800">Skills & Proficiency</h3>
+                        </div>
+                        <span class="text-xs font-medium bg-brand-50 text-brand-600 px-2 py-1 rounded">Auto-Extracted by
+                            AI</span>
+                    </div>
+
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-6">
+                            <input type="text" id="newSkillName" placeholder="Add a missing skill (e.g. React, SQL)"
+                                class="flex-1 px-4 py-2 border border-gray-200 rounded-lg text-sm outline-none focus:border-brand-500">
+                            <select id="newSkillLevel"
+                                class="bg-gray-50 border border-gray-200 rounded-lg text-sm px-4 py-2 outline-none">
+                                <option value="Beginner">Beginner</option>
+                                <option value="Intermediate">Intermediate</option>
+                                <option value="Advanced">Advanced</option>
+                            </select>
+                            <button type="button" onclick="addManualSkill()"
+                                class="bg-white border border-gray-200 shadow-sm px-4 rounded-lg hover:bg-gray-50 text-gray-600">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+
+                        <div class="space-y-3" id="profile-skills-list">
+                            <!-- Populated dynamically -->
+                            <div class="text-sm text-gray-500 py-4 text-center">No skills available. Upload resume
+                                first.</div>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+    <script>
+        const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+        const API_URL = isLocalhost ? `http://${window.location.hostname}:8000/api` : 'http://127.0.0.1:8000/api';
+        const token = localStorage.getItem('token');
+        let profileData = null;
+        let allJobsData = [];
+        let currentlySelectedJobId = null;
+
+        if (!token) {
+            window.location.href = 'index.html';
+        }
+
+        // --- UI Logic ---
+        function switchTab(tabId) {
+            ['dashboard', 'upload', 'jobs', 'profile'].forEach(id => {
+                document.getElementById(`tab-${id}`).classList.add('hidden');
+                document.getElementById(`nav-${id}`).classList.remove('active');
+            });
+            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+            document.getElementById(`nav-${tabId}`).classList.add('active');
+            
+            // Fix bug: Ensure job details view resets fully when navigating tabs
+            closeJobDetails();
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('selectedFileName').innerText = file.name;
+                document.getElementById('selectedFileName').classList.remove('hidden');
+                document.getElementById('uploadActions').classList.remove('hidden');
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            localStorage.removeItem('role');
+            window.location.href = 'index.html';
+        }
+
+        // --- API Integration ---
+        async function fetchProfile() {
+            try {
+                const res = await fetch(`${API_URL}/student/profile`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (res.status === 401) return logout();
+
+                profileData = await res.json();
+                renderDashboard();
+                renderProfileForm();
+            } catch (err) {
+                console.error("Error fetching profile", err);
+            }
+        }
+
+        async function fetchJobs() {
+            try {
+                const res = await fetch(`${API_URL}/student/jobs`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const jobs = await res.json();
+                allJobsData = jobs;
+                renderJobs(jobs);
+            } catch (err) {
+                console.error("Error fetching jobs", err);
+            }
+        }
+
+        // --- Render UI ---
+        function renderDashboard() {
+            const user = profileData;
+            document.getElementById('nav-student-name').innerText = user.full_name || 'Student';
+            document.getElementById('dash-name').innerText = user.full_name || 'Student';
+
+            const details = [];
+            if (profileData.department) details.push(profileData.department);
+            if (profileData.cgpa) details.push(`CGPA: ${profileData.cgpa}`);
+            document.getElementById('dash-course').innerText = details.join(' • ') || 'Upload resume to extract details';
+
+            // Top Status
+            const statusContainer = document.getElementById('resume-status-container');
+            if (profileData.resume_pdf_path) {
+                statusContainer.innerHTML = `
+                    <div class="text-brand-500 font-medium text-sm flex items-center gap-2">
+                        <i class="fas fa-check-circle"></i> Resume Uploaded
+                    </div>
+                    <button onclick="switchTab('upload')" class="px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm font-medium hover:bg-gray-50 flex items-center gap-2 shadow-sm">
+                        <i class="fas fa-upload text-gray-400"></i> Update Resume
+                    </button>
+                `;
+            } else {
+                statusContainer.innerHTML = `
+                    <div class="text-gray-400 font-medium text-sm flex items-center gap-2">
+                        <i class="fas fa-exclamation-circle text-orange-400"></i> Missing Resume
+                    </div>
+                    <button onclick="switchTab('upload')" class="px-4 py-2 bg-brand-900 text-white rounded-lg text-sm font-medium hover:bg-gray-800 shadow-sm transition">
+                        Upload Now
+                    </button>
+                `;
+            }
+
+            // Skills Pills
+            const skillsContainer = document.getElementById('dash-skills-container');
+            if (profileData.skills && profileData.skills.length > 0) {
+                document.getElementById('stat-skills').innerText = profileData.skills.length;
+
+                const visibleSkills = profileData.skills.slice(0, 7);
+                let html = visibleSkills.map(s => {
+                    const prof = s.proficiency || s.proficiency_level || 'Unknown';
+                    return `<span class="skill-pill">${s.skill_name} • ${prof.toLowerCase()}</span>`;
+                }).join('');
+
+                if (profileData.skills.length > 7) {
+                    html += `<span class="skill-pill-gray" onclick="switchTab('profile')" style="cursor:pointer">+${profileData.skills.length - 7} more</span>`;
+                }
+                skillsContainer.innerHTML = html;
+            } else {
+                document.getElementById('stat-skills').innerText = "0";
+                skillsContainer.innerHTML = `<span class="skill-pill-gray">No skills automatically extracted yet</span>`;
+            }
+        }
+
+        function renderProfileForm() {
+            if (!profileData) return;
+            const user = profileData;
+
+            document.getElementById('prof-name').value = user.full_name || '';
+            document.getElementById('prof-roll').value = user.roll_number || '';
+            document.getElementById('prof-dept').value = profileData.department || '';
+            document.getElementById('prof-cgpa').value = profileData.cgpa || '';
+            document.getElementById('prof-year').value = profileData.year || '';
+            document.getElementById('prof-phone').value = profileData.phone_number || '';
+
+            const skillsList = document.getElementById('profile-skills-list');
+            if (profileData.skills && profileData.skills.length > 0) {
+                skillsList.innerHTML = profileData.skills.map(s => `
+                    <div class="flex items-center justify-between p-4 bg-white border border-gray-100 rounded-xl shadow-sm hover:border-brand-200 transition">
+                        <div class="flex gap-3 items-center">
+                            <span class="font-medium text-gray-800 text-sm">${s.skill_name}</span>
+                            <span class="text-[10px] uppercase tracking-wider font-bold bg-gray-100 text-gray-500 px-2 py-0.5 rounded">${s.source === "AI_Extracted" ? "AI" : "Manual"}</span>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <span class="text-sm font-medium capitalize ${s.proficiency === 'Advanced' ? 'text-brand-600' : 'text-brand-400'}">${s.proficiency || s.proficiency_level}</span>
+                            <button type="button" onclick="deleteSkill(${s.id})" class="text-red-400 hover:text-red-600 w-8 h-8 flex items-center justify-center rounded-lg bg-red-50 hover:bg-red-100 transition"><i class="fas fa-trash-alt text-xs"></i></button>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                skillsList.innerHTML = '<div class="p-4 text-center text-gray-500 text-sm">No skills added yet.</div>';
+            }
+        }
+
+        function renderJobs(jobs) {
+            document.getElementById('stat-jobs').innerText = jobs.length;
+
+            if (jobs.length > 0) {
+                const maxScore = Math.max(...jobs.map(j => Math.round(j.overall_match_percentage || 0)));
+                document.getElementById('stat-match').innerText = `${Math.round(maxScore)}%`;
+            } else {
+                document.getElementById('stat-match').innerText = "0%";
+            }
+
+            const generateHtml = (jobList, noMatchMessage) => {
+                if (jobList.length === 0) {
+                    return `<div class="text-center py-10 bg-white rounded-2xl border border-gray-100 text-gray-500 text-sm">${noMatchMessage}</div>`;
+                }
+                return jobList.map(j => {
+                    const matchedStr = j.matched_skills.join(' • ');
+                    const score = Math.round(j.overall_match_percentage || 0);
+
+                    return `
+                        <div onclick="viewJobDetails(${j.job.id})" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between gap-6 hover:shadow-md transition cursor-pointer">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 justify-between md:justify-start mb-1">
+                                    <h3 class="text-lg font-bold text-brand-900">${j.job.title}</h3>
+                                    <span class="text-xs font-semibold px-2 py-1 bg-gray-100 text-gray-600 rounded-full border border-gray-200">Full-time</span>
+                                </div>
+                                <div class="text-sm text-gray-500 mb-3 flex items-center gap-2">
+                                    <i class="far fa-building"></i> ${j.job.company_name || 'Placement Cell'} <span class="text-gray-300">|</span> <i class="fas fa-map-marker-alt"></i> ${j.job.location || 'Campus / BVRITH'}
+                                </div>
+                                <p class="text-sm text-gray-600 mb-4 line-clamp-2">${j.job.description.replace(/LinkedIn(?:\s*\+\d+)?/gi, '')}</p>
+                                
+                                <div>
+                                    <span class="text-xs font-semibold text-gray-400 block mb-2 uppercase tracking-wide">Matched Skills</span>
+                                    <div class="flex flex-wrap gap-2">
+                                        ${j.matched_skills.map(s => `<span class="skill-pill">${s}</span>`).join('') || '<span class="text-xs italic text-gray-400">None</span>'}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="md:w-32 flex flex-col items-end justify-start md:border-l md:border-gray-100 md:pl-6 pt-4 md:pt-0 border-t border-gray-100">
+                                <span class="text-3xl font-extrabold text-brand-500">${score}%</span>
+                                <span class="text-xs text-gray-500 font-medium mb-3">Match Score</span>
+                                <div class="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                                    <div class="bg-brand-500 h-1.5 rounded-full" style="width: ${score}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            };
+
+            const matchedJobs = jobs.filter(j => (j.overall_match_percentage || 0) > 0);
+            
+            document.getElementById('jobs-container-dashboard').innerHTML = generateHtml(matchedJobs, "No matched jobs found. Update your profile or browse all available opportunities!");
+            document.getElementById('jobs-container-browse').innerHTML = generateHtml(jobs, "No jobs available currently.");
+        }
+
+        function viewJobDetails(jobId) {
+            const matchData = allJobsData.find(j => j.job.id === jobId);
+            if (!matchData) return;
+            currentlySelectedJobId = jobId;
+
+            const job = matchData.job;
+            const score = Math.round(matchData.overall_match_percentage || 0);
+
+            // Hide list, show details
+            document.getElementById('jobs-list-view').classList.add('hidden');
+            document.getElementById('job-details-view').classList.remove('hidden');
+
+            // Clean up AI states so generated details do not persist from old job views
+            document.getElementById('ai-recs-container').classList.add('hidden');
+            document.getElementById('ai-recs-content').innerHTML = '';
+            document.getElementById('btn-get-ai').innerHTML = '<i class="fas fa-sparkles text-yellow-300"></i> Get AI Recommendations';
+            document.getElementById('btn-get-ai').disabled = false;
+            document.getElementById('btn-recompute').innerHTML = '<i class="fas fa-sync-alt text-gray-400"></i> Recompute Match';
+            document.getElementById('btn-recompute').disabled = false;
+
+            // Header Content
+            document.getElementById('job-details-content').innerHTML = `
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col md:flex-row justify-between gap-8 relative items-center">
+                    <div class="flex-1 w-full">
+                        <div class="flex items-center gap-3 mb-3">
+                            <i class="fas fa-suitcase text-brand-500 text-2xl"></i>
+                            <h2 class="text-2xl font-bold text-gray-900">${job.title}</h2>
+                            <span class="text-xs font-semibold px-3 py-1 bg-gray-100 text-gray-700 rounded-full border border-gray-200 hidden md:inline-block">Full-time</span>
+                        </div>
+                        <div class="text-sm text-gray-500 mb-4 flex items-center gap-2">
+                            <span>${job.company_name || 'XYZ'}</span> <span class="text-gray-300">•</span> <i class="fas fa-map-marker-alt text-gray-400"></i> <span>${job.location || 'BVRITH'}</span>
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed max-w-2xl whitespace-pre-wrap">${job.description.replace(/LinkedIn(?:\s*\+\d+)?/gi, '')}</p>
+                    </div>
+                    
+                    <div class="w-full md:w-56 bg-gray-50 rounded-xl p-6 flex flex-col items-center justify-center border border-gray-100 shrink-0">
+                        <span class="text-4xl font-extrabold text-${score >= 60 ? 'brand-500' : 'orange-400'} leading-none mb-2">${score}%</span>
+                        <span class="text-sm text-gray-500 font-bold mb-4">Your Match</span>
+                        <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                            <div class="bg-${score >= 60 ? 'brand-500' : 'orange-400'} h-2 rounded-full" style="width: ${score}%"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Required Skills Array - Render pills with green checkmarks exactly like Lovable UI
+            const reqSkills = typeof job.required_skills === 'string' ? JSON.parse(job.required_skills) : job.required_skills;
+            if (reqSkills && Array.isArray(reqSkills)) {
+                // Determine if student has it or not to color differently
+                document.getElementById('job-details-req-skills').innerHTML = reqSkills.map(s => {
+                    const haveItStr = matchData.matched_skills.join('').toLowerCase();
+                    const skillNameStr = (s.skill || s).toLowerCase();
+                    const haveIt = haveItStr.includes(skillNameStr);
+                    const prof = s.proficiency ? `<span class="text-xs opacity-75 ml-0.5">• ${s.proficiency.toLowerCase()}</span>` : '';
+
+                    if (haveIt) return `<span class="bg-brand-50 text-brand-500 px-4 py-2 rounded-full text-sm font-semibold flex items-center gap-2"><i class="fas fa-check text-brand-400"></i> ${s.skill || s}${prof}</span>`;
+                    return `<span class="bg-gray-50 text-gray-500 px-4 py-2 rounded-full text-sm font-medium border border-gray-200 border-dashed">${s.skill || s}${prof}</span>`;
+                }).join('');
+            } else {
+                document.getElementById('job-details-req-skills').innerHTML = `<span class="text-sm text-gray-400 italic">No specific skills listed.</span>`;
+            }
+        }
+
+        function closeJobDetails() {
+            document.getElementById('job-details-view').classList.add('hidden');
+            document.getElementById('jobs-list-view').classList.remove('hidden');
+            currentlySelectedJobId = null;
+        }
+
+        function parseMarkdownToHTML(markdown) {
+            if (!markdown) return "";
+            
+            // Clean up Gemini's markdown into nicely structured Tailwind blocks
+            let html = markdown
+                // Main Headers (1. Skill Gap Analysis or 4. Pro Tips) -> render as h3 with large top margin
+                .replace(/(?:^|\n)\*\*((\d+\.|__)\s*.*?)\*\*/g, '</p><div class="mt-8 mb-4 border-b border-gray-200 pb-2"><h3 class="text-lg font-bold text-brand-900">$1</h3></div><p class="text-gray-700 leading-relaxed">')
+                // Specific Header for Career Advisor Assessment
+                .replace(/(?:^|\n)\*\*(Career Advisor Assessment.*?)\*\*/g, '</p><div class="mb-4 pb-2 border-b border-brand-100"><h3 class="text-xl font-bold text-brand-600"><i class="fas fa-user-tie mr-2"></i>$1</h3></div><p class="text-gray-700 leading-relaxed font-medium bg-brand-50/50 p-4 rounded-xl border border-brand-100">')
+                // Sub Headers (Gap: xyz or Week 1: abc or Question: def) -> render as h4 with medium margin
+                .replace(/(?:^|\n)\*\*([^:]+:\s*.*?)\*\*/g, '</p><h4 class="text-[15px] font-bold text-gray-800 mt-6 mb-2">$1</h4><p class="text-gray-700 leading-relaxed">')
+                // Standalone Sub Headers without colons (Technical, Behavioral)
+                .replace(/(?:^|\n)\*\*(Technical|Behavioral\/Contextual)\*\*/g, '</p><h4 class="text-md font-extrabold text-brand-500 mt-6 mb-3 uppercase tracking-wider">$1</h4><p class="text-gray-700 leading-relaxed">')
+                // Other bold items (e.g. bolded concept names)
+                .replace(/\*\*(.*?)\*\*/g, '<strong class="text-gray-900 font-semibold">$1</strong>')
+                // Paragraph breaks
+                .replace(/\n\n/g, '</p><p class="mt-4 text-gray-700 leading-relaxed">')
+                // Line breaks (ignore list items)
+                .replace(/\n(?!\-)/g, '<br/>')
+                // List items (Bolded starter) e.g. - **Gap:** XYZ
+                .replace(/- \*\*(.*?)\*\*(.*?)(<br\/>|\n|$)/g, '<li class="ml-5 mb-3 list-disc marker:text-brand-400"><strong class="text-gray-900">$1</strong>$2</li>')
+                // Standard List items
+                .replace(/- (.*?)(<br\/>|\n|$)/g, '<li class="ml-5 mb-2 list-disc marker:text-brand-400">$1</li>');
+
+            return `<div class="text-sm"><p class="text-gray-700 leading-relaxed">${html}</p></div>`
+                .replace(/<p[^>]*>\s*<\/p>/g, ''); // cleanup empty paragraphs
+        }
+
+        async function getAiRecommendations() {
+            if (!currentlySelectedJobId) return;
+
+            const btn = document.getElementById('btn-get-ai');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="fas fa-circle-notch fa-spin text-yellow-300"></i> Generating...`;
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`${API_URL}/student/jobs/${currentlySelectedJobId}/recommendations`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    document.getElementById('ai-recs-content').innerHTML = parseMarkdownToHTML(data.recommendations);
+                    document.getElementById('ai-recs-container').classList.remove('hidden');
+                    btn.innerHTML = `<i class="fas fa-check text-green-300"></i> Generated`;
+                } else {
+                    alert("Failed to fetch recommendations.");
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Network error.");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function recomputeMatch() {
+            if (!currentlySelectedJobId) return;
+
+            const btn = document.getElementById('btn-recompute');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<i class="fas fa-sync-alt fa-spin text-gray-400"></i> Recomputing...`;
+            btn.disabled = true;
+
+            try {
+                const res = await fetch(`${API_URL}/student/jobs/${currentlySelectedJobId}/recompute`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+
+                if (res.ok) {
+                    const updatedMatch = await res.json();
+
+                    // Update frontend state completely with new score & skills
+                    const jobIndex = allJobsData.findIndex(j => j.job.id === currentlySelectedJobId);
+                    if (jobIndex > -1) {
+                        allJobsData[jobIndex] = updatedMatch;
+                    }
+
+                    // Re-render UI views dynamically
+                    renderJobs(allJobsData);
+                    viewJobDetails(currentlySelectedJobId);
+
+                    // Specific toast or button confirmation
+                    const newBtn = document.getElementById('btn-recompute');
+                    newBtn.innerHTML = `<i class="fas fa-check text-green-500"></i> Updated!`;
+                    setTimeout(() => {
+                        newBtn.innerHTML = `<i class="fas fa-sync-alt text-gray-400"></i> Recompute Match`;
+                        newBtn.disabled = false;
+                    }, 3000);
+                } else {
+                    alert("Failed to recompute match.");
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Network error.");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // --- Actions ---
+        async function uploadResume() {
+            const fileInput = document.getElementById('resumeFile');
+            if (fileInput.files.length === 0) return alert('Select file first');
+
+            const btn = document.getElementById('uploadBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span>Processing (AI)...</span><i class="fas fa-circle-notch fa-spin"></i>';
+            btn.disabled = true;
+
+            const formData = new FormData();
+            formData.append("file", fileInput.files[0]);
+
+            try {
+                const res = await fetch(`${API_URL}/student/upload_resume`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    body: formData
+                });
+
+                if (res.ok) {
+                    await fetchProfile(); // refresh data
+                    await fetchJobs();
+                    switchTab('dashboard'); // take them to dashboard to see results!
+                    fileInput.value = "";
+                    document.getElementById('uploadActions').classList.add('hidden');
+                    document.getElementById('selectedFileName').classList.add('hidden');
+                } else {
+                    const data = await res.json();
+                    alert(data.detail || "Upload failed");
+                }
+            } catch (err) {
+                alert("Network error. Make sure backend is running.");
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        async function updateProfile(e) {
+            e.preventDefault();
+            const payload = {
+                roll_number: document.getElementById('prof-roll').value,
+                cgpa: parseFloat(document.getElementById('prof-cgpa').value) || 0.0,
+                department: document.getElementById('prof-dept').value,
+                year: document.getElementById('prof-year').value,
+                phone_number: document.getElementById('prof-phone').value
+            };
+
+            try {
+                const res = await fetch(`${API_URL}/student/profile`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+                if (res.ok) {
+                    alert("Profile updated successfully!");
+                    fetchProfile();
+                } else {
+                    alert("Failed to update profile");
+                }
+            } catch (err) {
+                alert("Network error.");
+            }
+        }
+
+        async function addManualSkill() {
+            const name = document.getElementById('newSkillName').value;
+            const level = document.getElementById('newSkillLevel').value;
+            if (!name) return;
+
+            try {
+                // The new skills endpoint maps to /profile/skills logic in student.py
+                const res = await fetch(`${API_URL}/student/profile/skills`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ skill_name: name, proficiency: level })
+                });
+                if (res.ok) {
+                    document.getElementById('newSkillName').value = '';
+                    fetchProfile();
+                    fetchJobs(); // Update matches
+                }
+            } catch (err) { }
+        }
+
+        async function deleteSkill(skillId) {
+            if (!confirm("Are you sure you want to remove this skill?")) return;
+            try {
+                const res = await fetch(`${API_URL}/student/profile/skills/${skillId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (res.ok) {
+                    fetchProfile();
+                    fetchJobs(); // Update matches since skill was removed
+                } else {
+                    alert("Failed to delete skill.");
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Init Flow
+        fetchProfile();
+        fetchJobs();
+
+    </script>
+</body>
+
+</html>

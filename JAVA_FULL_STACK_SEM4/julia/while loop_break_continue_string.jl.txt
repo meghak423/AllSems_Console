@@ -1,0 +1,35 @@
+x = 1          # Initialize a variable   # Program demonstrating while loop, break, and continue
+while x <= 5                    # While loop with break and continue
+    
+    if x % 2 == 0                        # Check if x is even
+        println("$x is even")
+    else
+        println("$x is odd")
+    end
+    x += 1                # Increment x          
+    if x == 4                # Break if x reaches 4
+        println("Breaking the loop")
+        break
+    end
+end
+output: 1 is odd
+	2 is even
+	3 is odd
+	Breaking the loop
+str = "Hello, Julia!"            # Define a string       # Program demonstrating string basics
+println("Length of the string: ", length(str))     # Length of the string
+println("First character: ", str[1])               # Accessing characters in a string
+println("Last character: ", str[end])
+println("Substring from index 3 to 8: ", str[3:8])              # Substring
+str2 = " Welcome to Julia!"                 # Concatenation
+println("Concatenated string: ", str * str2)
+name = "Alice"                         # String interpolation
+age = 30
+println("$name is $age years old.")
+output:  Length of the string: 12
+	First character: H
+	Last character: !
+	Substring from index 3 to 8: llo, J
+	Concatenated string: Hello, Julia! Welcome to Julia!
+	Alice is 30 years old.
+

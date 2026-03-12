@@ -1,0 +1,629 @@
+28/1/25  Tuesday
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-basic/problems/first-and-last
+2.https://hive.smartinterviews.in/contests/smart-interviews-basic/problems/zero-row-and-zero-column
+3.https://hive.smartinterviews.in/contests/smart-interviews-basic/problems/strong-password
+4.https://hive.smartinterviews.in/contests/smart-interviews-basic/problems/inverted-pyramid
+5.https://hive.smartinterviews.in/contests/smart-interviews-basic/problems/the-missing-number
+6.https://www.interviewbit.com/problems/is-rectangle/
+7.https://www.interviewbit.com/problems/total-moves-for-bishop/
+
+
+4/2/25   Tuesday
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-basic/problems/check-bit
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/binary-representation
+3.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/power-of-2
+4.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/count-set-bits
+5.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/x-1s-and-y-0s
+6.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/x-and-y-set-bits
+
+
+10/2/25  Sunday
+
+Batch B
+1.https://leetcode.com/problems/binary-gap/description/
+2.https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/description/
+3.https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent/
+4.https://leetcode.com/problems/shuffle-string/submissions/1538199383/
+5.https://leetcode.com/problems/concatenation-of-array/submissions/1538201292/
+
+11/2/25
+
+Batch B
+1.https://leetcode.com/problems/single-number/description/
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/subset-sum
+3.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/a-power-b
+4.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/x-1s-and-y-0s
+
+
+23/2/25
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/tower-of-hanoi
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/bubble-sort
+3.https://www.hackerrank.com/challenges/the-power-sum/problem
+4.https://www.hackerrank.com/challenges/recursive-digit-sum/problem
+5.https://leetcode.com/problems/fibonacci-number/submissions/1552950440/
+6.https://leetcode.com/problems/find-the-difference/submissions/1552951593/
+7.https://leetcode.com/problems/majority-element/submissions/1552953178/
+
+
+25/2/25
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/smaller-elements
+2.https://leetcode.com/problems/height-checker/submissions/1554840257/
+3.https://leetcode.com/problems/merge-sorted-array/submissions/
+
+
+1/3/25
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/power-game
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/sort-0s-and-1s
+3.https://www.interviewbit.com/problems/noble-integer/
+4.https://www.interviewbit.com/problems/wave-array/
+
+
+4/3/25
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/sum-of-pairs
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/finding-the-floor
+3.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/finding-frequency
+4.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/insertion-sort
+
+
+reverse, swap bits, flip, selection, nxt palindrome, 
+intersection of 2 line segments, trailing zeroes, diagnoal traversal of matrix, rotation of matrix , 
+spiral pattern ,  nxt palindrome, 
+
+
+6/3/25
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/coin-game
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/checkerboard-pattern
+3.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/swap-bits
+4.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/reverse-bits
+
+
+
+11/3/25
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/sum-of-pairs
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/finding-frequency
+3.https://leetcode.com/problems/contains-duplicate/submissions/1570362369/
+4.https://leetcode.com/problems/find-common-elements-between-two-arrays/submissions/1570378809/
+5.https://leetcode.com/problems/design-hashmap/description/
+
+
+12/3/25
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/pair-with-difference-k
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/triplet-with-sum-k
+3.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/finding-cuberoot
+4.https://leetcode.com/problems/maximum-count-of-positive-integer-and-negative-integer/description/?envType=daily-question&envId=2025-03-12
+5.https://www.interviewbit.com/problems/max-sum-contiguous-subarray/
+
+
+15/3/25
+
+Batch B
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/frequency-sort
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/count-equal-pairs
+3.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/count-equal-xor-pairs
+4.https://leetcode.com/problems/design-hashset/
+5.https://www.interviewbit.com/problems/search-for-a-range/
+6.https://www.interviewbit.com/problems/search-in-bitonic-array/
+7.https://www.interviewbit.com/problems/rotated-array/
+
+
+
+
+25/3/25
+
+Batch B
+
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/distinct-elements-in-window
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/first-repeating-character-1
+3.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/first-repeating-character-2
+4.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/check-anagrams
+5.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/guess-the-problem-1
+6.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/guess-the-problem-2
+7.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/longest-palindromic-substring
+8.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/maximum-subarray-sum
+
+
+
+8/4/25
+
+Batch B
+
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/collecting-water
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/closing-triplets
+3.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/toggle-01
+
+
+
+
+15/4/25
+
+Batch B
+
+1.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/tower-of-hanoi-modified
+2.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/maximum-contiguous-subsequence
+3.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/sum-of-all-subarrays
+4.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/longest-substring-without-vowels
+5.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/words-vowels-and-consonants
+6.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/number-of-anagramic-groups
+7.https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/sum-with-queries
+
+
+
+9/6/25
+
+Batch B
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/non-decreasing-subarrays
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/rotation-of-matrix?page=0&pageSize=10&justOpened=true
+3. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/spiral-pattern
+4. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/sum-of-xor-of-pairs?page=0&pageSize=10&search=xor
+5. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/product-of-xor-of-pairs?page=0&pageSize=10&search=xor
+6. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/trailing-zeros-modified
+
+
+
+
+
+11/6/25
+
+Batch B
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/implement-stack
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/implement-queue
+3. https://www.hackerrank.com/challenges/print-the-elements-of-a-linked-list/problem
+4. https://www.hackerrank.com/challenges/print-the-elements-of-a-linked-list-in-reverse/problem?isFullScreen=true
+5. https://www.hackerrank.com/challenges/insert-a-node-at-the-tail-of-a-linked-list/problem?isFullScreen=true
+6. https://www.hackerrank.com/challenges/insert-a-node-at-the-head-of-a-linked-list/problem?isFullScreen=true
+7. https://www.hackerrank.com/challenges/insert-a-node-at-a-specific-position-in-a-linked-list/problem?isFullScreen=true
+8. https://www.hackerrank.com/challenges/delete-a-node-from-a-linked-list/problem?isFullScreen=true
+9. https://www.hackerrank.com/challenges/delete-duplicate-value-nodes-from-a-sorted-linked-list/problem
+10. https://www.hackerrank.com/challenges/compare-two-linked-lists/problem
+11. https://www.hackerrank.com/challenges/reverse-a-linked-list/problem?isFullScreen=true
+12. https://www.hackerrank.com/challenges/get-the-value-of-the-node-at-a-specific-position-from-the-tail/problem
+13. https://leetcode.com/problems/middle-of-the-linked-list/description/
+14. https://leetcode.com/problems/palindrome-linked-list/description/
+
+
+
+12/6/25
+
+Batch B
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/words-start-and-end-with-vowel
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/number-of-anagramic-groups
+3. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/query-odd-sum
+4. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/sum-with-queries
+5. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/max-element-with-queries
+6. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/number-of-valid-subarrays
+
+
+
+13/6/25
+
+Batch B
+
+1. https://leetcode.com/problems/reorder-list/submissions/1662774808/
+2. https://leetcode.com/problems/sort-list/ 
+3. https://leetcode.com/problems/odd-even-linked-list/submissions/1662792088/
+4. https://leetcode.com/problems/delete-node-in-a-linked-list/
+
+
+
+Batch  B
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/protective-villagers
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/enclosing-substring
+3. https://leetcode.com/problems/minimum-size-subarray-sum/
+4. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/enclosing-bottles
+
+
+
+4/9/25
+
+Batch B
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/prime-love
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/large-range-primes
+3. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/prime-coins
+
+
+
+11/9/25
+
+Batch B
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/exclusion-product?page=0&pageSize=10&search=exc
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/prime-coins
+3. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/equal-0s-and-1s?page=0&pageSize=10&search=equal
+
+
+
+
+25/9/25
+
+Batch B
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/rectangular-area-under-histogram
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/implement-deque
+3. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/window-maximum
+4. https://leetcode.com/problems/next-greater-element-i/description/
+5. https://leetcode.com/problems/next-greater-element-ii/description/
+6. https://leetcode.com/problems/intersection-of-two-linked-lists/description/
+
+
+
+
+1/12/25
+
+Batch B
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/left-view-of-tree?page=0&pageSize=10&search=left
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/right-view-of-tree?page=0&pageSize=10&search=right
+3. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/collecting-mangoes?page=0&pageSize=10&search=col
+4. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/quadruples-of-xor?page=0&pageSize=10&search=qua
+5. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/subsequence-sum?page=0&pageSize=10&search=subseq
+6. https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+7. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/express-as-a-power-b?page=0&pageSize=10&search=exp
+8. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/changing-directories?page=0&pageSize=10&search=chan
+
+
+2/12/25
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/preorder-inorder-to-postorder
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/nodes-at-distance-k
+3. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/vertical-order-of-tree
+4. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/diagonal-order-traversal
+5. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/top-view-of-tree
+
+
+
+3/12/25
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/maximum-path-sum?page=0&pageSize=10&search=max
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/lowest-common-ancestor?page=0&pageSize=10&search=lowe
+
+
+
+4/12/25
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/implement-min-heap?page=0&pageSize=10&search=min
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/kth-smallest-element?page=0&pageSize=10&search=kth
+3. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/anytime-median?page=0&pageSize=10&search=medi
+
+
+5/12/25
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/maximum-xor?page=0&pageSize=10&search=max
+2. https://www.hackerrank.com/challenges/contacts/problem
+3. https://leetcode.com/problems/count-partitions-with-even-sum-difference/submissions/1847525930/?envType=daily-question&envId=2025-12-05
+4. https://www.geeksforgeeks.org/problems/unique-rows-in-boolean-matrix/1
+
+
+
+19/2/26
+
+1. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/number-of-connected-components?page=0&pageSize=10&search=compo
+2. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/path-in-a-graph
+3. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/shortest-path-unweighted?page=0&pageSize=10&search=weig
+4. https://hive.smartinterviews.in/contests/smart-interviews-primary/problems/shortest-path-weighted?page=0&pageSize=10&search=weig
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Internal contest 1                        -                                       4/3/2025 
+
+1. Farthest Indices 
+Given an array A of N positive integers. Print the maximum of j - i subjected to the constraint of A[i] ≤ A[j].
+
+Input Format
+The first line of input contains an integer N. The second line of input contains an array of size N.
+
+Output Format
+For the given input, print a single line representing the answer.
+
+Constraints
+1 ≤ N ≤ 103
+0 ≤ Ai ≤ 109
+
+Example
+Input
+9
+10 9 10 31 12 90 320 313 9 
+
+Output
+7
+
+Explanation
+
+If we choose the element at index 0 and the element at index 7, where 10 <= 313, the difference between their indices (j - i) is 7, which is the maximum value we can obtain. If we choose the element at index 1 and the element at index 8, where 9 <= 9, even for these indices, j - i equals 7.
+
+o/p  : # Enter your code here. Read input from STDIN. Print output to STDOUT
+
+n = int(input())
+arr = list(map(int,input().split()))
+max_dist = 0
+
+for i in range(n):
+    for j in range(n-1,i,-1):
+        if arr[i] <= arr[j]:
+            max_dist = max(max_dist,j-i)
+            break
+
+print(max_dist)
+        
+
+
+
+2. Frequency of K in Matrix 
+Given a matrix of size N x M and an integer K, find the frequency of element K in the matrix.
+
+Input Format
+The first line of input contains N, M, and K. It is followed by N lines, each containing M integers - elements of the matrix.
+
+Output Format
+Print the frequency of element K in the matrix.
+
+Constraints
+1 <= N, M, K <= 100
+-103 <= mat[i][j] <= 103
+
+Example
+Input
+3 3 2
+4 3 1
+2 -4 34
+2 2 9
+
+Output
+3
+
+Explanation
+
+Self Explanatory
+
+o/p : # Enter your code here. Read input from STDIN. Print output to STDOUT
+
+n,m,k = list(map(int,input().split()))
+
+count = 0
+
+for i in range(n):
+    row = list(map(int,input().split()))
+    count += row.count(k)
+
+print(count)
+
+
+
+3. Flip Bits
+ You are given two numbers A and B. Write a program to count the number of bits to be flipped to change the number A to the number B. Flipping a bit of a number means changing a bit from 1 to 0 or vice versa.
+
+Input Format
+The first line of input contains T - the number of test cases. Each of the next T lines contains 2 integers A and B, separated by space.
+
+Output Format
+For each test case, print the number of bit flips required to convert A to B, separated by a new line.
+
+Constraints
+1 <= T <= 100000
+0 <= A, B <= 109
+
+Example
+Input
+4
+20 10
+16 8
+1 153
+549 24
+
+Output
+4
+2
+3
+6
+
+Explanation
+
+Self Explanatory
+
+o/p :  # Enter your code here. Read input from STDIN. Print output to STDOUT
+
+def flip(a,b):
+    return bin(a^b).count('1')
+
+t = int(input())
+for _ in range(t):
+    a,b = map(int,input().split())
+
+    print(flip(a,b))
+
+    
+
+4. H Pattern 
+Given N - the height and M - the width, print the letter "H" using '*'.
+
+Input Format
+The first line of input contains T - number of test cases. It is followed by T lines. The each line contains N - height space separated by M - width.
+
+Output Format
+For each test case, print a single integer which is the minimum number of swaps required to group all 1's together.
+
+Constraints
+1 <= T <= 50
+3 < M <= N < 100
+
+Example
+Input
+3
+3 3
+6 5
+5 3
+
+Output
+Case #1:* *
+***
+* *
+Case #2:*   *
+*   *
+*****
+*   *
+*   *
+*   *
+Case #3:* *
+* *
+***
+* *
+* *
+
+Explanation
+
+Self Explanatory
+
+o/p : # Enter your code here. Read input from STDIN. Print output to STDOUT
+
+t = int(input())
+for i in range(t):
+    n,m = map(int,input().split())
+    r = 0
+    if n % 2 == 0:
+        r = n//2
+    else:
+        r = n//2 + 1
+
+    print(f"Case #{i+1}:")
+
+    for i in range(0,n):
+        for j in range(0,m):
+            if j == 0 or j == m-1 or i == r-1 :
+                print("*",end ="")
+            else:
+                print(end = " ")
+        
+        print()
+
+
+
+
+5. Number of Divisors
+ Given a number, find the number of divisors of that number.
+
+Input Format
+First line of input contains T - number of test cases. Its followed by T lines, each containing a single number N.
+
+Output Format
+For each test case, print the number of divisors of N, separated by newline.
+
+Constraints
+30 points
+1 <= T <= 100
+1 <= N <= 106
+
+70 points
+1 <= T <= 100
+1 <= N <= 109
+
+Example
+Input
+5
+8
+16808
+9
+23
+97158
+
+Output
+4
+16
+3
+2
+8
+
+Explanation
+
+Self Explanatory
+
+
+o/p : import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Main. */
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt();
+
+        while(T --> 0) {
+            int count = 0;
+            long n = sc.nextLong();
+            long sqrtn = (long)Math.sqrt(n);
+
+            for (long i=1;i<=sqrtn;i++) {
+                if ( n % i == 0) {
+                    count++;
+                    if( i != n/i) {
+                        count++;
+                    }
+                }
+            }
+            System.out.println(count);
+        }
+        sc.close();   
+    }
+}
+
+
+
+
+

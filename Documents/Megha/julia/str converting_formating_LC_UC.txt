@@ -1,0 +1,20 @@
+name = "Alice"                     # Program demonstrating string converting and formatting
+age = 30
+age_str = string(age)               # Convert age to string
+formatted_str = "$name is $age_str years old."        # Format string using string interpolation
+println(formatted_str)                  # Output formatted string
+output:  Alice is 30 years old.
+str = "  Julia Programming Language  " # Program demonstrating string manipulations    # Define a string
+str_lower = lowercase(str)                    # Convert to lowercase
+println("Lowercase: $str_lower")
+str_upper = uppercase(str)                   # Convert to uppercase
+println("Uppercase: $str_upper")
+str_trimmed = strip(str)               # Trim whitespace
+println("Trimmed: $str_trimmed")
+str_replaced = replace(str, "Programming" => "Programming and Data Science")     # Replace substring
+println("Replaced: $str_replaced")
+output: Lowercase:   julia programming language  
+	Uppercase:   JULIA PROGRAMMING LANGUAGE  
+	Trimmed: Julia Programming Language
+	Replaced:   Julia Programming and Data Science Language  
+

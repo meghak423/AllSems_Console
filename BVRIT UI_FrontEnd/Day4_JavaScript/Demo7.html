@@ -1,0 +1,48 @@
+<html lang="en">
+
+<head>
+    <title>Demo7</title>
+    <script>
+
+        function isPrime(num) {
+            for (let i = 2; i < num; i++) {
+                if (num % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function checkNumber() {
+            let num = parseInt(document.getElementById("num").value) || -1;
+            let result = document.getElementById("header1");
+            let message = "";
+
+            if (num != -1) {
+                if (isPrime(num)) {
+                    result.style.color = "Green";
+                    message = "Prime Number"
+                } else {
+                    result.style.color = "Blue";
+                    message = "Not a Prime Number";
+                }
+            } else {
+                result.style.color = "Red";
+                message = "Enter a Number";
+            }
+
+            result.innerHTML = message;            
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Welcome to JavaScript</h1>
+
+    Enter a Number: <input type="text" id="num" /> <br />
+    <button onclick="checkNumber()">Check Number</button> <br />
+
+    <h1 id="header1"></h1>
+</body>
+
+</html>

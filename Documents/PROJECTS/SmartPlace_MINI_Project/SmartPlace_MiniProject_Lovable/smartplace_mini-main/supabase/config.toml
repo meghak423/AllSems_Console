@@ -1,0 +1,10 @@
+project_id = "byropzzamayrewqqmcgo"
+
+[functions.parse-resume]
+verify_jwt = false
+
+[functions.compute-matches]
+verify_jwt = false
+
+[functions.job-recommendations]
+verify_jwt = false

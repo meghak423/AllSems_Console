@@ -1,0 +1,34 @@
+<html lang="en">
+<head>
+    <title>Demo10</title>
+    <script>
+
+        //Array of JSON Objects
+        let employees = [
+            {"empId":101, "empName":"Harsha", salary:1212.12},
+            {"empId":102, "empName":"Pasha",  salary:2323.23},
+            {"empId":103, "empName":"Mahesh", salary:3434.34}
+        ];
+
+        function showEmployees() {
+            let result = "<h3><u>Employees Info</u></h3><ol>";
+
+                for (let emp of employees) {
+                    result += "<li>";                    
+                    result += "EmpId:"   + emp.empId + "<br/>";
+                    result += "EmpName:" + emp.empName + "<br/>";
+                    result += "Salary:"  + emp.salary + "<br/>";             
+                    result += "</li><br/>";
+                }
+           
+            result += "</ol><br/>"
+            document.getElementById("para1").innerHTML = result;
+        }
+    </script>
+</head>
+<body>
+    <h1 id="header1">Welcome to JavaScript</h1>
+    <button onclick="showEmployees()">Show Employees</button> <br />
+    <p id="para1"></p>
+</body>
+</html>

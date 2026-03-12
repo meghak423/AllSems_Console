@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartPlace - Smart Campus Placement System</title>
+    <!-- Modern Fonts matching Lovable -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6', // Teal
+                            600: '#0d9488',
+                            900: '#1e293b', // Dark Slate for headers
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fafafa;
+        }
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .hero-pill {
+            background: #f0fdfa;
+            color: #14b8a6;
+            border: 1px solid #ccfbf1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans text-gray-800">
+
+    <!-- Top Navigation -->
+    <nav class="glass-nav sticky top-0 z-50 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2 cursor-pointer" onclick="showView('home')">
+            <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center">
+                <i class="fas fa-brain text-white text-sm"></i>
+            </div>
+            <span class="font-bold text-xl text-brand-900 tracking-tight">SmartPlace</span>
+        </div>
+        <div class="flex gap-4">
+            <button onclick="showAuth('student')" class="px-5 py-2 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-100 transition border border-gray-200 flex items-center gap-2">
+                <i class="fas fa-user-graduate"></i> Student Login
+            </button>
+            <button onclick="showAuth('admin')" class="px-5 py-2 rounded-full text-sm font-medium text-white bg-brand-900 hover:bg-gray-800 transition shadow-sm flex items-center gap-2">
+                <i class="fas fa-user-shield"></i> Admin Login
+            </button>
+        </div>
+    </nav>
+
+    <!-- Custom Toaster -->
+    <div id="toastError" class="fixed top-20 left-1/2 transform -translate-x-1/2 bg-red-50 border border-red-200 text-red-700 py-3 px-6 rounded-lg shadow-lg hidden items-center gap-3 z-50 animate-fade-in transition-all">
+        <i class="fas fa-exclamation-circle"></i>
+        <div class="flex-1 text-sm font-medium" id="errorMsgText">Error occurred</div>
+        <button onclick="document.getElementById('toastError').classList.add('hidden')"><i class="fas fa-times opacity-50 hover:opacity-100"></i></button>
+    </div>
+
+    <!-- MAIN HOME VIEW (Lovable Landing Page) -->
+    <main id="view-home" class="flex-1 flex flex-col items-center pt-24 pb-20 px-4">
+        
+        <div class="hero-pill px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 mb-8 shadow-sm">
+            <i class="fas fa-bolt"></i> Powered by Deep Learning & NLP
+        </div>
+
+        <h1 class="text-5xl md:text-6xl font-extrabold text-center tracking-tight leading-tight mb-6">
+            <span class="text-brand-900 block mb-2">Smart Campus</span>
+            <span class="text-brand-500 block">Placement System</span>
+        </h1>
+
+        <p class="text-gray-500 text-center max-w-2xl text-lg mb-16 leading-relaxed">
+            AI-driven semantic matching between student resumes and job descriptions. Automated skill gap analysis and bias-free candidate ranking.
+        </p>
+
+        <!-- Role Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl mb-24">
+            
+            <div onclick="showAuth('student')" class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer flex flex-col items-center text-center group">
+                <div class="w-14 h-14 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-500 group-hover:text-white transition-colors duration-300">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-brand-900 mb-4">I'm a Student</h3>
+                <p class="text-gray-500 mb-8 leading-relaxed">Upload resume, discover job matches, get AI career recommendations & interview prep</p>
+                <div class="text-brand-500 font-medium flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                    Get Started <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <div onclick="showAuth('admin')" class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer flex flex-col items-center text-center group">
+                <div class="w-14 h-14 rounded-full bg-gray-50 text-gray-500 flex items-center justify-center text-2xl mb-6 group-hover:bg-brand-900 group-hover:text-white transition-colors duration-300">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-brand-900 mb-4">I'm an Admin</h3>
+                <p class="text-gray-500 mb-8 leading-relaxed">Post jobs, rank candidates by skills & CGPA, select students for placements</p>
+                <div class="text-brand-500 font-medium flex items-center gap-2 group-hover:translate-x-1 transition-transform">
+                    Admin Portal <i class="fas fa-arrow-right"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Stats -->
+        <div class="flex flex-wrap justify-center gap-16 md:gap-32 w-full max-w-4xl border-t border-gray-100 pt-16">
+            <div class="text-center">
+                <div class="text-brand-500 text-2xl mb-2"><i class="fas fa-users"></i></div>
+                <div class="text-4xl font-extrabold text-brand-900 mb-1">500+</div>
+                <div class="text-sm font-medium text-gray-500">Students Matched</div>
+            </div>
+            <div class="text-center">
+                <div class="text-brand-500 text-2xl mb-2"><i class="fas fa-briefcase"></i></div>
+                <div class="text-4xl font-extrabold text-brand-900 mb-1">120+</div>
+                <div class="text-sm font-medium text-gray-500">Job Postings</div>
+            </div>
+            <div class="text-center">
+                <div class="text-brand-500 text-2xl mb-2"><i class="fas fa-chart-line"></i></div>
+                <div class="text-4xl font-extrabold text-brand-900 mb-1">92%</div>
+                <div class="text-sm font-medium text-gray-500">Placement Rate</div>
+            </div>
+        </div>
+
+        <!-- How SmartPlace Works Section -->
+        <div class="mt-32 w-full max-w-6xl flex flex-col items-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-4">How SmartPlace Works</h2>
+            <p class="text-gray-500 mb-16 text-lg text-center max-w-xl">Leveraging AI models for intelligent placement automation.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 w-full">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center text-brand-500 mb-6 font-bold text-lg">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-brand-900 mb-3">AI Resume Analysis</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Deep learning models automatically extract skills, experience, and qualifications from resumes with proficiency levels.</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center text-brand-500 mb-6 font-bold text-lg">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-brand-900 mb-3">Semantic Job Matching</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Beyond keyword matching — understand contextual similarity between skills and job requirements.</p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center text-brand-500 mb-6 font-bold text-lg">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-brand-900 mb-3">Skill Gap Prediction</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Actionable insights showing exactly which skills students need to improve their match scores.</p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center text-brand-500 mb-6 font-bold text-lg">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-brand-900 mb-3">Bias-Free Shortlisting</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Fair, transparent ranking based purely on skills and qualifications — no demographic bias.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Role Features Section -->
+        <div class="mt-32 w-full max-w-5xl">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- For Students -->
+                <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-full bg-brand-50 flex items-center justify-center text-brand-500 text-xl">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-900">For Students</h3>
+                    </div>
+                    
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>Upload resume & auto-extract skills</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>Get AI-powered job matching scores</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>Skill gap analysis & improvement roadmap</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>Recommended courses & interview questions</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>Track placement readiness</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- For Admins -->
+                <div class="bg-white p-10 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-12 rounded-full bg-brand-900 flex items-center justify-center text-white text-xl">
+                            <i class="fas fa-user-cog"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-900">For Admins</h3>
+                    </div>
+                    
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>Post & manage job listings</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>Rank candidates by skills & match %</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>Filter students by CGPA, skills, projects</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>Select & shortlist for placements</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <i class="fas fa-check text-brand-500 mt-1"></i> <span>View all student skill profiles</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="mt-20 border-t border-gray-100 w-full text-center text-xs text-gray-400 font-medium py-8 uppercase tracking-wider">
+            SmartPlace — AI-Based Semantic Matching Platform • Mini Project 2026
+        </div>
+
+    </main>
+
+    <!-- AUTHENTICATION VIEW (Lovable Auth Page) -->
+    <main id="view-auth" class="hidden flex-1 flex flex-col items-center pt-24 pb-20 px-4 bg-gray-50/50">
+        
+        <div class="mb-8 text-center">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center">
+                    <i class="fas fa-brain text-white text-sm"></i>
+                </div>
+                <span class="font-bold text-xl text-brand-900 tracking-tight">SmartPlace</span>
+            </div>
+            <div class="inline-flex items-center gap-2 text-brand-500 bg-brand-50 px-3 py-1 rounded-md text-sm font-medium mb-6">
+                <i class="fas fa-user-graduate" id="auth-role-icon"></i> <span id="auth-role-badge">Student Portal</span>
+            </div>
+            
+            <h2 class="text-3xl font-bold text-brand-900 mb-2" id="auth-title">Welcome Back</h2>
+            <p class="text-gray-500" id="auth-subtitle">Sign in to your student account</p>
+        </div>
+
+        <div class="bg-white w-full max-w-md p-8 rounded-2xl shadow-sm border border-gray-100">
+            <form id="authForm" onsubmit="handleAuth(event)" class="space-y-5">
+                
+                <div id="registerFields" class="hidden space-y-5">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-3 top-3.5 text-gray-400 text-sm"></i>
+                            <input type="text" id="fullName" placeholder="Meghana K" class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all bg-gray-50 focus:bg-white text-sm">
+                        </div>
+                    </div>
+                    <div id="rollNumberField">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">College Roll Number</label>
+                        <div class="relative">
+                            <i class="fas fa-id-card absolute left-3 top-3.5 text-gray-400 text-sm"></i>
+                            <input type="text" id="rollNumber" placeholder="23WH1A12C1" class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all bg-gray-50 focus:bg-white text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <div class="relative">
+                        <i class="far fa-envelope absolute left-3 top-3.5 text-gray-400 text-sm"></i>
+                        <input type="email" id="email" required placeholder="you@university.edu" class="w-full pl-10 pr-4 py-2.5 rounded-lg border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all bg-gray-50 focus:bg-white text-sm">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <i class="fas fa-lock absolute left-3 top-3.5 text-gray-400 text-sm"></i>
+                        <input type="password" id="password" required placeholder="••••••••" class="w-full pl-10 pr-10 py-2.5 rounded-lg border border-gray-200 focus:border-brand-500 focus:ring-1 focus:ring-brand-500 outline-none transition-all bg-gray-50 focus:bg-white text-sm">
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-2.5 p-1 text-gray-400 hover:text-gray-600 transition outline-none">
+                            <i class="fas fa-eye" id="togglePasswordIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="submitBtn" class="w-full bg-brand-900 text-white font-medium py-2.5 px-4 rounded-lg shadow-sm hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+                        <span id="submitBtnText">Sign In</span>
+                        <i class="fas fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-8 text-center text-sm text-gray-500 space-y-2">
+            <p>
+                <span id="toggleText">Don't have an account?</span> 
+                <button onclick="toggleAuthMode()" class="text-brand-500 hover:text-brand-600 font-medium">
+                    <span id="toggleLink">Sign Up</span>
+                </button>
+            </p>
+            <p>
+                <span id="roleText">Are you an admin?</span> 
+                <button onclick="toggleAuthRole()" class="text-brand-500 hover:text-brand-600 font-medium">
+                    <span id="roleLink">Admin Login</span>
+                </button>
+            </p>
+            <div class="pt-4">
+                <button onclick="showView('home')" class="text-gray-400 hover:text-gray-600 flex items-center justify-center gap-2 w-full">
+                    <i class="fas fa-arrow-left text-xs"></i> Back to Home
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // State
+        let currentRole = 'student'; // 'student' or 'admin'
+        let currentMode = 'login'; // 'login' or 'register'
+        
+        const isLocalhost = window.location.hostname === "localhost";
+        const API_URL = isLocalhost ? 'http://localhost:8000/api' : 'http://127.0.0.1:8000/api';
+
+        function togglePasswordVisibility() {
+            const pwdInput = document.getElementById('password');
+            const icon = document.getElementById('togglePasswordIcon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                pwdInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        function showView(view) {
+            document.getElementById('view-home').classList.add('hidden');
+            document.getElementById('view-auth').classList.add('hidden');
+            document.getElementById('toastError').classList.add('hidden');
+            
+            document.getElementById(`view-${view}`).classList.remove('hidden');
+            
+            if (view === 'home') {
+                // Reset to default when going back home
+                currentMode = 'login';
+            }
+        }
+
+        function showAuth(role) {
+            currentRole = role;
+            updateAuthUI();
+            showView('auth');
+        }
+
+        function toggleAuthMode() {
+            currentMode = currentMode === 'login' ? 'register' : 'login';
+            updateAuthUI();
+        }
+
+        function toggleAuthRole() {
+            currentRole = currentRole === 'student' ? 'admin' : 'student';
+            currentMode = 'login'; // Always reset to login when switching role
+            updateAuthUI();
+        }
+
+        function updateAuthUI() {
+            document.getElementById('toastError').classList.add('hidden');
+            
+            // Icons & Badges
+            document.getElementById('auth-role-icon').className = currentRole === 'student' ? 'fas fa-user-graduate' : 'fas fa-user-cog';
+            document.getElementById('auth-role-badge').innerText = currentRole === 'student' ? 'Student Portal' : 'Admin Portal';
+            
+            // Text
+            const roleName = currentRole === 'student' ? 'student' : 'admin';
+            
+            if (currentMode === 'login') {
+                document.getElementById('auth-title').innerText = 'Welcome Back';
+                document.getElementById('auth-subtitle').innerText = `Sign in to the ${roleName} dashboard`;
+                document.getElementById('submitBtnText').innerText = 'Sign In';
+                document.getElementById('toggleText').innerText = "Don't have an account?";
+                document.getElementById('toggleLink').innerText = "Sign Up";
+                document.getElementById('registerFields').classList.add('hidden');
+            } else {
+                document.getElementById('auth-title').innerText = 'Create Account';
+                document.getElementById('auth-subtitle').innerText = `Register a new ${roleName} account`;
+                document.getElementById('submitBtnText').innerText = 'Create Account';
+                document.getElementById('toggleText').innerText = "Already have an account?";
+                document.getElementById('toggleLink').innerText = "Sign In";
+                document.getElementById('registerFields').classList.remove('hidden');
+            }
+            
+            // Toggle helpers
+            if (currentRole === 'student') {
+                document.getElementById('roleText').innerText = "Not a student?";
+                document.getElementById('roleLink').innerText = "Admin Login";
+                document.getElementById('rollNumberField').style.display = "block";
+            } else {
+                document.getElementById('roleText').innerText = "Not an admin?";
+                document.getElementById('roleLink').innerText = "Student Login";
+                document.getElementById('rollNumberField').style.display = "none";
+            }
+        }
+
+        function showError(msg) {
+            document.getElementById('toastError').classList.remove('hidden');
+            document.getElementById('toastError').style.display = 'flex';
+            document.getElementById('errorMsgText').innerText = msg;
+            
+            // Auto hide after 5s
+            setTimeout(() => {
+                document.getElementById('toastError').classList.add('hidden');
+            }, 5000);
+        }
+
+        async function handleAuth(e) {
+            e.preventDefault();
+            document.getElementById('toastError').classList.add('hidden');
+            
+            const btn = document.getElementById('submitBtn');
+            const originalBtnHtml = btn.innerHTML;
+            btn.innerHTML = '<span>Processing...</span><i class="fas fa-circle-notch fa-spin text-xs"></i>';
+            btn.classList.add('opacity-75', 'cursor-not-allowed');
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                if(currentMode === 'register') {
+                    const payload = {
+                        email: email,
+                        password: password,
+                        role: currentRole,
+                        full_name: document.getElementById('fullName').value,
+                        roll_number: currentRole === 'student' ? document.getElementById('rollNumber').value : null
+                    };
+
+                    const res = await fetch(`${API_URL}/auth/register`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify(payload)
+                    });
+
+                    if(!res.ok) throw new Error((await res.json()).detail || "Registration Failed. Server unreachable.");
+                    
+                    // Auto-login after successful register
+                    currentMode = 'login';
+                    await handleAuth(e);
+
+                } else {
+                    const formData = new URLSearchParams();
+                    formData.append('username', email);
+                    formData.append('password', password);
+
+                    const res = await fetch(`${API_URL}/auth/login`, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        body: formData
+                    });
+
+                    if(!res.ok) throw new Error((await res.json()).detail || "Invalid Credentials or API is down.");
+                    const data = await res.json();
+                    
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('role', data.role);
+                    
+                    window.location.href = data.role === 'student' ? 'student_dashboard.html' : 'admin_dashboard.html';
+                }
+            } catch(error) {
+                // Determine if it was a fetch error
+                let errMsg = error.message;
+                if(errMsg.includes("Failed to fetch") || errMsg === "network error") {
+                    errMsg = "Unable to connect to the backend API Server. Please ensure 'start.bat' is fully running.";
+                }
+                showError(errMsg);
+            } finally {
+                btn.innerHTML = originalBtnHtml;
+                btn.classList.remove('opacity-75', 'cursor-not-allowed');
+            }
+        }
+    </script>
+</body>
+</html>

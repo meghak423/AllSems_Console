@@ -1,0 +1,408 @@
+# Update this once in a week except in windows laptop
+
+sudo apt update
+sudo apt --yes dist-upgrade
+sudo apt install git
+git init
+
+
+# kmegha mail changing as primary mail
+
+
+github done
+gitlab done
+codechef done
+leetcode done
+codeforces  -> megha_12c1 -> clg mail
+
+# sended this msg to him in codeforces -> https://codeforces.com/profile/MikeMirzayanov
+
+Subject: Request to Change Registered Email Address
+
+Hello Mike,
+
+I am the owner of the Codeforces account “megha_12c1” and my current registered email is my college ID (23wh1a12c1@bvrithyderabad.edu.in), which will soon be deactivated.
+
+I would like to change it to my personal email: kmegha9505@gmail.com
+
+Please let me know if you need any verification from my side.
+
+Thank you!
+– Megha
+
+
+
+# interviewBit  -> Meghana_12c1 -> clg mail          mailed to -> support@interviewbit.com
+
+Dear InterviewBit Team,
+
+I hope you're doing well.
+
+I am writing to request an update to my registered email address on InterviewBit. My current account is associated with my college email (example: 23whna12c1@bvrit.ac.in), but as I will soon lose access to it, I would like to change it to my personal email.
+
+Here are my details:
+- Full Name: Meghana Kantayapalem
+- Registered (College) Email: 23wh1a12c1@bvrithyderabad.edu.in
+- New Personal Email: [kmegha9505@gmail.com]
+- Reason for Change: Graduating and will no longer have access to college email.
+
+Kindly help me update the email associated with my account so I can continue accessing all features and communications.
+
+Please let me know if any additional verification is needed.
+
+Thank you for your support.
+
+Best regards,  
+Meghana Kantayapalem
+
+
+
+
+
+hackerrank - prbm
+
+
+# GITLAB Project related git commands and Multi user remote + local git
+
+# Asokan
+
+commands in terminal by asokan on 29/5/25
+
+pwd
+mkdir WingsAI
+cd WingsAI
+pwd
+mkdir trial
+cd trial
+git init    -> it shows  -> Initialized empty Git repository in /home/megha/WingsAI/trial/.git/
+git status   -> On branch master - No commits yet - nothing to commit (create/copy files and use "git add" to track)
+gedit README.py
+git status
+git add README.py 
+git status
+git commit -m "First commit" README.py          -> Author identity unknown    ( commiting the phrases like sentences)
+git config --global user.email "kmegha9505@gmail.com"               (configuration)
+git config --global user.name "meghanak"
+git commit -m "First commit" README.py ->[master(root-commit)3ca54f7]First commit 1 file changed,3 insertions(+) create         mode 100644 README.py
+git status     -> On branch master  nothing to commit, working tree clean
+git status
+git add README.py   -> to add them into track of files
+git commit README.py
+git log  -> for showing the commit history
+gedit README.py
+git commit -m "Include a Restore commit" README.py
+git status
+git log
+git diff a372f0af 24aadeb8          -> 1st 6 digits of 1 commit, 1st 6 digits of other commit
+
+[create blank project -> in wingsai _> ls -> clone -> ls -> cd ---     ->   git status   
+open file  README.md
+edit it _ "Repo removed"   something msg written in file
+git status
+git commit -m " msg" README.md
+refresh project in gitlab
+git push
+username, password for mail   then 
+refresh in gitlab project
+]
+
+git clone https://repo.we4shakthi.in/wingsai/wings_ai_trial.git
+git status
+
+username : meghanak , password for mail for gitlab mail
+
+
+
+# Asokan 30/5/25
+				
+ ** SSH - secure shell - one way used to communication secure - used to log into remote computer's shell or CLI and to execute  commands on a remote server.
+ kernel - inner most software layer 
+ shell - most outer layer (strong layer around OS)
+ when u r sending over a remote machine , info is encrypted.
+ 
+ ETAOIN
+ SHRDLU    - most frequency letters
+ 
+ WAP encrypt the msg using decrypt attack ?
+* most frequently occuring bigram -> th
+ 
+ commands in terminal
+ 
+man ssh-keygen  ( manually generated ids - attributes)
+ssh-keygen -t ed25519 -> (filename) enter ->(passphrase) -any password i.e. We formed a cluster group 
+
+in a group of 6
+
+left -> cd -> pwd -> 
+center -> ls .ssh ->
+right -> ssh-keygen -t ed25519 -> We formed a cluster group -> We formed a cluster group -> then img : 
+
++--[ED25519 256]--+
+|          ..ooEoX|
+|          ..o*+O=|
+|           o++*=B|
+|           o.*oBo|
+|        S o = + +|
+|       . = . o ..|
+|        = + . * .|
+|       . o   o + |
+|                 |
++----[SHA256]-----+
+
+-> ls .ssh -> o/p: authorized_keys  id_ed25519  id_ed25519.pub        ( .pub -> public key , other -> key )
+
+how to copy public key to server in linux ? 
+
+-> ssh-copy-id username@hostname/ip-addr -> i.e. ssh-copy-id megha@ubuntu@repo.we4shakthi.in
+-> cat .ssh/id_ed25519.pub -> enter - > o/p : (ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5dbqDr+Rbevk+voS2yoVJJtsoNlr5I3/+ib9h1ZPR7 megha@Ubuntu25)  -> copy it -> add key in gitlab in (edit profile -> SSH keys)  -> title: Ubuntu1 key -> add key
+
+copy SSH key url from project gitlab page 
+In terminal -> git clone sshkeyUrl ->  enter  
+
+[
+To delete the clone -> first check what clones are there in that folder -> type ls in terminal -> 0/p: those are clones > cmd:  rm -rf nameofit(clones u got in o/p - choose one by one) -> enter clones are deleted.
+]
+
+
+
+
+
+
+
+#  *****    TOTAL TERMINAL COMMANDS TODAY	 *****
+
+
+[
+megha@Ubuntu25:~$ ssh-keygen -t ed25519
+Generating public/private ed25519 key pair.
+Enter file in which to save the key (/home/megha/.ssh/id_ed25519): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Passphrases do not match.  Try again.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/megha/.ssh/id_ed25519
+Your public key has been saved in /home/megha/.ssh/id_ed25519.pub
+The key fingerprint is:
+SHA256:3iwXatXcbQDw3agNNfgId4dXuWlAb9f/Mng2EH2UdRI megha@Ubuntu25
+The key's randomart image is:
++--[ED25519 256]--+
+|          ..ooEoX|
+|          ..o*+O=|
+|           o++*=B|
+|           o.*oBo|
+|        S o = + +|
+|       . = . o ..|
+|        = + . * .|
+|       . o   o + |
+|                 |
++----[SHA256]-----+
+megha@Ubuntu25:~$ ls .ssh
+authorized_keys  id_ed25519  id_ed25519.pub
+megha@Ubuntu25:~$ cat .ssh/id_ed25519.pub
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5dbqDr+Rbevk+voS2yoVJJtsoNlr5I3/+ib9h1ZPR7 megha@Ubuntu25
+megha@Ubuntu25:~$ git clone git@repo.we4shakthi.in:wingsai/wings_ai_trial.git
+Cloning into 'wings_ai_trial'...
+The authenticity of host 'repo.we4shakthi.in (139.84.138.131)' can't be established.
+ED25519 key fingerprint is SHA256:XyHXVrd/0Oa4EXgRNVt1ttzOFkXZU9gkRAu4GrWlwXk.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? ^C
+megha@Ubuntu25:~$ cd WingsAI
+megha@Ubuntu25:~/WingsAI$ git clone git@repo.we4shakthi.in:wingsai/wings_ai_trial.git
+fatal: destination path 'wings_ai_trial' already exists and is not an empty directory.
+megha@Ubuntu25:~/WingsAI$ ls
+trial  wings_ai_trial
+megha@Ubuntu25:~/WingsAI$ rm -rf wings_ai_trail
+megha@Ubuntu25:~/WingsAI$ ls
+trial  wings_ai_trial
+megha@Ubuntu25:~/WingsAI$ rm -rf wings_ai_trial
+megha@Ubuntu25:~/WingsAI$ ls
+trial
+megha@Ubuntu25:~/WingsAI$ rm -rf trial
+megha@Ubuntu25:~/WingsAI$ ls
+megha@Ubuntu25:~/WingsAI$ git clone git@repo.we4shakthi.in:wingsai/wings_ai_trial.git
+Cloning into 'wings_ai_trial'...
+The authenticity of host 'repo.we4shakthi.in (139.84.138.131)' can't be established.
+ED25519 key fingerprint is SHA256:XyHXVrd/0Oa4EXgRNVt1ttzOFkXZU9gkRAu4GrWlwXk.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'repo.we4shakthi.in' (ED25519) to the list of known hosts.
+remote: Enumerating objects: 6, done.
+remote: Total 6 (delta 0), reused 0 (delta 0), pack-reused 6 (from 1)
+Receiving objects: 100% (6/6), done.
+megha@Ubuntu25:~/WingsAI$ 
+
+]
+
+
+
+
+
+
+
+   # continuation
+   
+# Practise
+
+1. create a new project -> group-6 -> then go to manage -> members -> invite members by their usernames with maintainer access to them -> grp  created.
+2. clone the git -> git clone git@repo.we4shakthi.in:wingsai/group-6.git           (url of SSH)
+3. edit file ->  ctrl A shift enter -> write text i.e. this is a repository called grp 6
+4. git add filenameTotal...  -> git status
+5. git commit -m " msg" filenameTotal -> git status -> git push
+if error -> git pull -> git config pull.rebase false  ->  ctrl l -> git pull  
+save - (ctrl o ) enter ->  ctrl x ->  done  -> git push  
+check git pull -> ls -> until all the team mem succeed push.  -> git log
+
+
+ 
+What happens if both started to edit at once ?
+ctrl l -> ls -> create a file of members.txt
+gedit members.txt
+git status
+git add members.txt
+git commit -m "Members file committed" members.txt
+git push       (updates remote from local)
+-> if error -> git pull             (changes local from remote)
+gedit members.txt - remove extra changes and save
+git commit -a
+ls
+cat members.txt
+
+
+
+
+#					*****    TOTAL TERMINAL COMMANDS TODAY	 *****
+[
+megha@Ubuntu25:~/WingsAI/group-6$ gedit members.txt
+megha@Ubuntu25:~/WingsAI/group-6$ gedit members.txt
+megha@Ubuntu25:~/WingsAI/group-6$ git add members.txt
+megha@Ubuntu25:~/WingsAI/group-6$ git commit -m "Meghana members.txt file committed" members.txt
+[main 896e614] Meghana members.txt file committed
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+megha@Ubuntu25:~/WingsAI/group-6$ git push
+To repo.we4shakthi.in:wingsai/group-6.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'repo.we4shakthi.in:wingsai/group-6.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+megha@Ubuntu25:~/WingsAI/group-6$ git pull
+remote: Enumerating objects: 14, done.
+remote: Counting objects: 100% (14/14), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 9 (delta 4), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (9/9), 982 bytes | 109.00 KiB/s, done.
+From repo.we4shakthi.in:wingsai/group-6
+   7f9d014..46121f4  main       -> origin/main
+Auto-merging members.txt
+Merge made by the 'ort' strategy.
+ members.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+megha@Ubuntu25:~/WingsAI/group-6$ gedit members.txt
+megha@Ubuntu25:~/WingsAI/group-6$ git commit -a
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+megha@Ubuntu25:~/WingsAI/group-6$ ls
+ashrita.txt  grishma.txt  meghana.txt  members.txt  mythili.txt  README.md  sukeerthi.txt  vennela.txt
+megha@Ubuntu25:~/WingsAI/group-6$ gedit members.txt
+megha@Ubuntu25:~/WingsAI/group-6$ gedit members.txt
+megha@Ubuntu25:~/WingsAI/group-6$ ls
+ashrita.txt  grishma.txt  meghana.txt  members.txt  mythili.txt  README.md  sukeerthi.txt  vennela.txt
+megha@Ubuntu25:~/WingsAI/group-6$ cat members.txt
+Ashrita
+	AIML - 2nd yr B Tech
+Mythili
+	IT - 2nd Year B Tech
+Sukeerthi
+	IInd CSE B
+K.Meghana 
+	B.Tech III Year I Sem from IT-B
+grishma 
+ im from cse b
+
+megha@Ubuntu25:~/WingsAI/group-6$ git push
+To repo.we4shakthi.in:wingsai/group-6.git
+ ! [rejected]        main -> main (fetch first)
+error: failed to push some refs to 'repo.we4shakthi.in:wingsai/group-6.git'
+hint: Updates were rejected because the remote contains work that you do not
+hint: have locally. This is usually caused by another repository pushing to
+hint: the same ref. If you want to integrate the remote changes, use
+hint: 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+megha@Ubuntu25:~/WingsAI/group-6$ git pull
+remote: Enumerating objects: 23, done.
+remote: Counting objects: 100% (23/23), done.
+remote: Compressing objects: 100% (16/16), done.
+remote: Total 18 (delta 10), reused 0 (delta 0), pack-reused 0 (from 0)
+Unpacking objects: 100% (18/18), 1.65 KiB | 73.00 KiB/s, done.
+From repo.we4shakthi.in:wingsai/group-6
+   46121f4..9257666  main       -> origin/main
+Auto-merging members.txt
+Merge made by the 'ort' strategy.
+ members.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+megha@Ubuntu25:~/WingsAI/group-6$ git push
+Enumerating objects: 15, done.
+Counting objects: 100% (15/15), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 948 bytes | 237.00 KiB/s, done.
+Total 9 (delta 6), reused 0 (delta 0), pack-reused 0
+To repo.we4shakthi.in:wingsai/group-6.git
+   9257666..fa3b633  main -> main
+megha@Ubuntu25:~/WingsAI/group-6$ ls
+ashrita.txt  grishma.txt  meghana.txt  members.txt  mythili.txt  README.md  sukeerthi.txt  vennela.txt
+megha@Ubuntu25:~/WingsAI/group-6$ cat members.txt
+Vennela
+	I Year CSE-D
+This is group 6
+Ashrita
+	AIML - 2nd yr B Tech
+Mythili
+	IT - 2nd Year B Tech
+Sukeerthi
+	IInd CSE B
+K.Meghana 
+	B.Tech III Year I Sem from IT-B
+grishma 
+	Ist cse B
+
+]
+
+	
+#  sudo apt install tree
+
+
+megha@Ubuntu25:~/WingsAI/group-6$ cd ..
+megha@Ubuntu25:~/WingsAI$ cd ..
+megha@Ubuntu25:~$ sudo apt install tree
+[sudo] password for megha: 
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  tree
+0 upgraded, 1 newly installed, 0 to remove and 132 not upgraded.
+Need to get 47.1 kB of archives.
+After this operation, 111 kB of additional disk space will be used.
+Ign:1 http://in.archive.ubuntu.com/ubuntu noble/universe amd64 tree amd64 2.1.1-2ubuntu3
+Get:1 http://in.archive.ubuntu.com/ubuntu noble/universe amd64 tree amd64 2.1.1-2ubuntu3 [47.1 kB]
+Fetched 47.1 kB in 6s (8,210 B/s)
+Selecting previously unselected package tree.
+(Reading database ... 199329 files and directories currently installed.)
+Preparing to unpack .../tree_2.1.1-2ubuntu3_amd64.deb ...
+Unpacking tree (2.1.1-2ubuntu3) ...
+Setting up tree (2.1.1-2ubuntu3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+
+In terminal -> tree
+
+
+
+
+
